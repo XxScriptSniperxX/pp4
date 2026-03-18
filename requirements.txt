@@ -1,0 +1,8 @@
+streamlit
+python-pptx
+Pillow
+matplotlib
+numpy
+plotly
+kaleido
+st-ant-tree
