@@ -40,8 +40,10 @@ def file_settings(prefix=""):
     directory = st.text_input("Directory:", key=f"{prefix}ppt_directory",
                               value=r"C:\\project files\\General_PostP_tool\\scratch\\out")
     filename = st.text_input("Name:", key=f"{prefix}ppt_filename", value="Unyblyat")
-    template_path = st.text_input("Template path:", key=f"{prefix}ppt_template",
-                                  value=r"C:\\project files\\General_PostP_tool\\scratch\\template.pptx")
+    # template_path = st.text_input("Template path:", key=f"{prefix}ppt_template",
+    #                               value=r"C:\\project files\\General_PostP_tool\\scratch\\template.pptx")
+    base_dir = os.path.dirname(__file__)
+    template_path = os.path.join(base_dir, "template.pptx")
     return directory, filename, template_path
 
 def export_settings(prefix=""):
@@ -280,16 +282,80 @@ def create_maneuver_slides(prs, maneuver_id, figures, cutfactor_1d, cutfactor_2d
                 ph.element.getparent().remove(ph.element)
             except IndexError:
                 pass
+# @st.fragment
+# def pptX_tree(key=None):
+#     st.subheader("Export PowerPoint Presentation (Tree)")
+
+#     tree_data = [
+#         {"title": "cover_slide", "value": "cover"},
+#         {"title": "overview_slide", "value": "overview"},
+#     ]
+
+#     for m in st.session_state["tabs"].keys():
+#         man_node = {"title": f"Maneuver {m}", "value": f"man{m}", "children": []}
+#         for page_idx, figdata in enumerate(st.session_state["tabs"][m]["figures"], start=0):
+#             page_name = figdata.page_data.get("title", f"Page{page_idx}")
+#             page_node = {"title": page_name, "value": f"man{m}_page{page_idx}", "children": []}
+
+#             stowaway_dict = st.session_state.get("stowaways", {}).get(m, None)
+#             if stowaway_dict is None:
+#                 stowaway_dict = st.session_state["tabs"][m].get("stowaway", {})
+
+#             if isinstance(stowaway_dict, dict):
+#                 for option_key in stowaway_dict.keys():
+#                     page_node["children"].append({
+#                         "title": option_key,
+#                         "value": f"man{m}_page{page_idx}_{option_key}"
+#                     })
+#             elif isinstance(stowaway_dict, list):
+#                 for param in stowaway_dict:
+#                     page_node["children"].append({
+#                         "title": param,
+#                         "value": f"man{m}_page{page_idx}_{param}"
+#                     })
+
+#             man_node["children"].append(page_node)
+
+#         tree_data.append(man_node)
+
+#     selected_values = st_ant_tree(
+#         treeData=tree_data,
+#         showSearch=True,
+#         treeCheckable=True,
+#         defaultValue=st.session_state["default_selected"],
+#         # key=key,
+#         max_height=600,
+#         placeholder="Search and select"
+#     )
+
+#     table_mapping = {}
+
+#     if selected_values:
+#         for val in selected_values:
+#             if "_page" in val:
+#                 man_part, rest = val.split("_page", 1)
+#                 page_part, stowaway_key = rest.split("_", 1)
+
+#                 maneuver_id = man_part.replace("man", "", 1)
+#                 page_no = page_part
+
+#                 if maneuver_id not in table_mapping:
+#                     table_mapping[maneuver_id] = {}
+#                 if page_no not in table_mapping[maneuver_id]:
+#                     table_mapping[maneuver_id][page_no] = []
+
+#                 table_mapping[maneuver_id][page_no].append(stowaway_key)
+
+#     st.session_state["table_mapping"] = table_mapping
+#     st.write("Table mapping:", table_mapping)
 
 @st.fragment
 def pptX_tree(key=None):
     st.subheader("Export PowerPoint Presentation (Tree)")
 
-    # Initialize flag
     if "show_tree" not in st.session_state:
         st.session_state["show_tree"] = False
 
-    # Button toggles the flag
     if st.button("➕ Add Table", key="add_table_btn"):
         st.session_state["show_tree"] = True
 
@@ -326,50 +392,32 @@ def pptX_tree(key=None):
 
             tree_data.append(man_node)
         
-        # st.markdown(
-        #     """
-        #     <style>
-        #     .scroll-tree {
-        #         max-height: 600px;   /* increase height */
-        #         overflow-y: auto;
-        #         border: 1px solid #ddd;
-        #         padding: 8px;
-        #     }
-        #     </style>
-        #     """,
-        #     unsafe_allow_html=True
-        # )
-        # st.markdown('<div class="scroll-tree">', unsafe_allow_html=True)
-        
         selected_values = st_ant_tree(
             treeData=tree_data,
             showSearch=True,
             treeCheckable=True,
             defaultValue=st.session_state["default_selected"],
-            key=key
+            key=key,
+            max_height=600,
+            placeholder="Search and select"
         )
-        # st.markdown('</div>', unsafe_allow_html=True)
-        # Build mapping
-        # Build mapping: maneuver -> page -> stowaway key
+
         table_mapping = {}
 
         if selected_values:
             for val in selected_values:
-                # Expect val like: man<ManeuverID>_page<pageIdx>_<stowawayKey>
                 if "_page" in val:
                     man_part, rest = val.split("_page", 1)
                     page_part, stowaway_key = rest.split("_", 1)
 
-                    maneuver_id = man_part.replace("man", "", 1)  # strip leading "man"
+                    maneuver_id = man_part.replace("man", "", 1)
                     page_no = page_part
 
-                    # Initialize nested dict
                     if maneuver_id not in table_mapping:
                         table_mapping[maneuver_id] = {}
                     if page_no not in table_mapping[maneuver_id]:
                         table_mapping[maneuver_id][page_no] = []
 
-                    # Append stowaway key
                     table_mapping[maneuver_id][page_no].append(stowaway_key)
         
         st.session_state["table_mapping"] = table_mapping
