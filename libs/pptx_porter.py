@@ -94,26 +94,29 @@ def longest_common_suffix(strings):
 
 def clean_vehicle_names(vehicle_names):
     """Remove common prefix and suffix across all vehicle names and truncate to 34 chars."""
-    prefix = longest_common_prefix(vehicle_names)
-    suffix = longest_common_suffix(vehicle_names)
     cleaned = {}
+    if len(vehicle_names) > 1:
+        prefix = longest_common_prefix(vehicle_names)
+        suffix = longest_common_suffix(vehicle_names)
+    else:
+        prefix = ""
+        suffix = ""
+
     for name in vehicle_names:
         new_name = name
         if prefix:
             new_name = new_name[len(prefix):]
         if suffix and new_name.endswith(suffix):
             new_name = new_name[:-len(suffix)]
-        
-        # Clean up separators first
+
         new_name = new_name.strip("_- ")
-        
-        # --- ADD TRUNCATION RULE HERE ---
+
         if len(new_name) > 33:
             new_name = new_name[:31] + "..."
-            
+
         cleaned[name] = new_name
-        
     return cleaned
+
 
 def shorten_st_key(st_key: str, maneuver_id: str) -> str:
     """Remove maneuver_id and trailing underscores/dashes, case-insensitively."""
@@ -166,14 +169,21 @@ def insert_stowaway_tables(slide, maneuver_id, page_idx, table_mapping):
                 for r, (veh, val) in enumerate(vehicle_data.items(), start=1):
                     table.cell(r, 0).text = cleaned_map[veh]
                     try:
-                        table.cell(r, 1).text = f"{float(val):.2f}"
+                        num = float(val)
+                        if abs(num) < 0.01:
+                            table.cell(r, 1).text = f"{num:.4f}"
+                        else:
+                            table.cell(r, 1).text = f"{num:.2f}"
                     except (ValueError, TypeError):
                         table.cell(r, 1).text = str(val)
 
                     for c in range(cols):
                         cell = table.cell(r, c)
                         para = cell.text_frame.paragraphs[0]
-                        run = para.runs[0]
+                        if para.runs:
+                            run = para.runs[0]
+                        else:
+                            run = para.add_run()  # create a run if none exist
                         run.font.size = Pt(10)
                         cell.text_frame.word_wrap = False
                         cell.margin_left = Pt(2)
@@ -258,8 +268,18 @@ def create_maneuver_slides(prs, maneuver_id, figures, cutfactor_1d, cutfactor_2d
             slide.shapes.add_picture(legend_path, Inches(6.0), Inches(1.5))
 
         # --- NEW: insert stowaway tables if mapped ---
-        if table_mapping:
+        # if table_mapping:
+        #     insert_stowaway_tables(slide, maneuver_id, idx, table_mapping)
+            
+        if maneuver_id in table_mapping and str(idx) in table_mapping[maneuver_id]:
             insert_stowaway_tables(slide, maneuver_id, idx, table_mapping)
+        else:
+            # remove unused table placeholder if no data
+            try:
+                ph = slide.placeholders[18]  # adjust index to your layout
+                ph.element.getparent().remove(ph.element)
+            except IndexError:
+                pass
 
 @st.fragment
 def pptX_tree(key=None):
