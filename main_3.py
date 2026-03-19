@@ -344,7 +344,17 @@ st.markdown(
     div[data-testid="stFileUploaderDropzoneInstructions"] svg {{
         fill: {global_color_manager.text} !important;
     }}
-
+    /* ---------------- TOAST ---------------- */
+    div.stToast {{
+        background-color: {global_color_manager.secondary} !important;
+        color: {global_color_manager.text} !important;
+        border-radius: 6px;
+        padding: 8px;
+    }}
+    div.stToast p {{
+        color: {global_color_manager.text} !important;
+        font-weight: bold;
+    }}
     /* ---------------- EXPANDERS ---------------- */
     details > summary {{
         background-color: {global_color_manager.secondary} !important;
@@ -516,7 +526,7 @@ if st.sidebar.button("🚀 Let's Roll", use_container_width=True):
                 format_folder=format_folder,
                 aliases=aliases_map
             )
-            phunt(stowaways,name="phunt_sto")
+            phunt(impostors,name="imps")
 
             # Save both outputs into session state
             st.session_state["classified_output"] = classified_output
@@ -632,8 +642,6 @@ if "tabs" in st.session_state and "impostors" in st.session_state:
     with tabs[-1]:
         pptX_tab()
         # st.button("update", key="onckle")
-
-
 
 # Place this once in your script (anywhere after st imports)
 st.markdown("""
