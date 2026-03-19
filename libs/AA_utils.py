@@ -53,45 +53,6 @@ def phunt(obj, directory=".", name=None):
 
     return filepath
 
-
-def respect(image, target_size=(854, 586), bg_color=(255, 255, 255)): #Resize with aspect
-    """Resize image proportionally and pad to target_size."""
-    target_w, target_h = target_size
-    w, h = image.size
-    scale = min(target_w / w, target_h / h)
-    new_w, new_h = int(w * scale), int(h * scale)
-
-    resized = image.resize((new_w, new_h), Image.LANCZOS)
-    canvas = Image.new("RGB", target_size, bg_color)
-    offset = ((target_w - new_w) // 2, (target_h - new_h) // 2)
-    canvas.paste(resized, offset)
-    return canvas
-
-
-# ⭐ NEW: legend resize by width only (9.21 cm → 3.626 in → 348 px)
-def resth(image, target_width_px=348): #resize legend by width
-    w, h = image.size
-    scale = target_width_px / w
-    new_w = target_width_px
-    new_h = int(h * scale)
-    return image.resize((new_w, new_h), Image.LANCZOS)
-
-def resend(image, target_width_px=348, target_height_px=344, bg_color=(255,255,255)): #resize and pad legend
-    # Resize horizontally only
-    w, h = image.size
-    scale = target_width_px / w
-    new_w = target_width_px
-    new_h = int(h * scale)
-    resized = image.resize((new_w, new_h), Image.LANCZOS)
-
-    # Pad vertically to match placeholder height
-    canvas = Image.new("RGB", (target_width_px, target_height_px), bg_color)
-    offset_y = (target_height_px - new_h) // 2
-    canvas.paste(resized, (0, offset_y))
-
-    return canvas
-
-
 def update_presets_json(updates: dict):
     """
     Merge updates into the existing presets.json file.
