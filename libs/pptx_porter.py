@@ -14,13 +14,14 @@ from datetime import datetime
 import streamlit as st
 import os
 import matplotlib.pyplot as plt
-from libs.AA_utils import resend,respect,phunt
+# from libs.AA_utils import phunt
 from st_ant_tree import st_ant_tree
 from pptx.util import Cm
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 import re
 from pptx.dml.color import RGBColor
 from pptx.util import Pt
+import cv2
 
 def debug_placeholders(slide):
     """
@@ -94,6 +95,21 @@ def longest_common_suffix(strings):
     rev = [s[::-1] for s in strings]
     return longest_common_prefix(rev)[::-1]
 
+def update_vehicle_aliases(cleaned_map, alias_map):
+    """
+    Compare original names with cleaned aliases and update only if changed. 
+    """
+    updated = {}
+    for idx,(name, val) in enumerate(cleaned_map.items()):
+        print(name)
+        alias = alias_map[idx]  # fallback to original
+        print(alias)
+        if alias != name:
+            updated[name] = alias
+        else:
+            updated[name] = val
+    return updated
+
 def clean_vehicle_names(vehicle_names):
     """Remove common prefix and suffix across all vehicle names and truncate to 34 chars."""
     cleaned = {}
@@ -129,8 +145,9 @@ def shorten_st_key(st_key: str, maneuver_id: str) -> str:
 def insert_stowaway_tables(slide, maneuver_id, page_idx, table_mapping):
     page_key = str(page_idx)
     if maneuver_id in table_mapping and page_key in table_mapping[maneuver_id]:
+        stowaway_dict = st.session_state.get("stowaways", {}).get(maneuver_id, {})
+        imps = st.session_state.get("impostors", {}).get(maneuver_id, {}).get(f"Page_{page_idx}", [])
         for st_key in table_mapping[maneuver_id][page_key]:
-            stowaway_dict = st.session_state.get("stowaways", {}).get(maneuver_id, {})
             if st_key in stowaway_dict:
                 vehicle_data = stowaway_dict[st_key]
 
@@ -166,10 +183,10 @@ def insert_stowaway_tables(slide, maneuver_id, page_idx, table_mapping):
 
                 # --- Clean vehicle names ---
                 cleaned_map = clean_vehicle_names(list(vehicle_data.keys()))
-
+                cleaned = update_vehicle_aliases(cleaned_map, imps)
                 # --- Data rows ---
                 for r, (veh, val) in enumerate(vehicle_data.items(), start=1):
-                    table.cell(r, 0).text = cleaned_map[veh]
+                    table.cell(r, 0).text = cleaned[veh]
                     try:
                         num = float(val)
                         if abs(num) < 0.01:
@@ -214,6 +231,68 @@ def insert_stowaway_tables(slide, maneuver_id, page_idx, table_mapping):
                 for row in table.rows:
                     row.height = row_height
 
+def respect(image, target_size=(854, 586), bg_color=(255, 255, 255)): #Resize with aspect
+    """Resize image proportionally and pad to target_size."""
+    target_w, target_h = target_size
+    w, h = image.size
+    scale = min(target_w / w, target_h / h)
+    new_w, new_h = int(w * scale), int(h * scale)
+
+    resized = image.resize((new_w, new_h), Image.LANCZOS)
+    canvas = Image.new("RGB", target_size, bg_color)
+    offset = ((target_w - new_w) // 2, (target_h - new_h) // 2)
+    canvas.paste(resized, offset)
+    return canvas
+
+def resend(image, target_width_px=348, target_height_px=344, bg_color=(255,255,255)):
+    """
+    Resize legend image to fit inside target box while maintaining aspect ratio.
+    Pads with background color if needed.
+    """
+    w, h = image.size
+
+    # Compute scale factor to fit within both dimensions
+    scale = min(target_width_px / w, target_height_px / h)
+    new_w = int(w * scale)
+    new_h = int(h * scale)
+
+    # Resize with aspect ratio preserved
+    resized = image.resize((new_w, new_h), Image.LANCZOS)
+
+    # Create canvas and paste centered
+    canvas = Image.new("RGB", (target_width_px, target_height_px), bg_color)
+    offset_x = (target_width_px - new_w) // 2
+    offset_y = (target_height_px - new_h) // 2
+    canvas.paste(resized, (offset_x, offset_y))
+
+    return canvas
+
+def detect_legend_bbox(base_img_path, fallback_ratio=0.75):
+    """
+    Detect the bounding box of the legend using grayscale + threshold.
+    Returns (x, y, w, h). Falls back to a vertical split if detection fails.
+    """
+    cv_img = cv2.imread(base_img_path)
+    h, w = cv_img.shape[:2]
+
+    gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY_INV)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    legend_bbox = None
+    for cnt in contours:
+        x, y, cw, ch = cv2.boundingRect(cnt)
+        if x > w * 0.6 and cw > 50 and ch > 50:
+            legend_bbox = (x, y, cw, ch)
+            break
+
+    if legend_bbox is None:
+        # fallback: split ratio
+        split_x = int(w * fallback_ratio)
+        legend_bbox = (split_x, 0, w - split_x, h)
+
+    return legend_bbox, h, w
+
 def create_maneuver_slides(prs, maneuver_id, figures, cutfactor_1d, cutfactor_2d, temp_dir,
                            table_mapping=None, slide_number=None):
     title_layout = prs.slide_layouts[3]
@@ -242,17 +321,23 @@ def create_maneuver_slides(prs, maneuver_id, figures, cutfactor_1d, cutfactor_2d
             figcrop = img.crop((margin, 0, w, h))
             figcrop.save(base_img_path)
 
+        # --- SPLITTING LOGIC with bounding box crop ---
+        legend_bbox, h, w = detect_legend_bbox(base_img_path, fallback_ratio=split_ratio)
+        x, y, cw, ch = legend_bbox
+
         img = Image.open(base_img_path)
-        w, h = img.size
-        plot_crop = img.crop((0, 0, int(w * split_ratio), h))
-        legend_crop = img.crop((int(w * split_ratio), 0, w, h))
+        plot_crop = img.crop((0, 0, x, h))              # everything left of legend
+        legend_crop = img.crop((x, y, x+cw, y+ch))      # exact legend bounding box
+        # --- END SPLITTING LOGIC ---
+
         plot_resized = respect(plot_crop, (854, 586))
         plot_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_plot.png")
         plot_resized.save(plot_path)
+
         legend_resized = resend(legend_crop, target_width_px=348, target_height_px=344)
         legend_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_legend.png")
         legend_resized.save(legend_path)
-        
+
         slide_layout = prs.slide_layouts[4]
         slide = prs.slides.add_slide(slide_layout)
         try:
@@ -269,19 +354,16 @@ def create_maneuver_slides(prs, maneuver_id, figures, cutfactor_1d, cutfactor_2d
         except KeyError:
             slide.shapes.add_picture(legend_path, Inches(6.0), Inches(1.5))
 
-        # --- NEW: insert stowaway tables if mapped ---
-        # if table_mapping:
-        #     insert_stowaway_tables(slide, maneuver_id, idx, table_mapping)
-            
         if maneuver_id in table_mapping and str(idx) in table_mapping[maneuver_id]:
             insert_stowaway_tables(slide, maneuver_id, idx, table_mapping)
         else:
-            # remove unused table placeholder if no data
             try:
                 ph = slide.placeholders[18]  # adjust index to your layout
                 ph.element.getparent().remove(ph.element)
             except IndexError:
                 pass
+
+
 # @st.fragment
 # def pptX_tree(key=None):
 #     st.subheader("Export PowerPoint Presentation (Tree)")
