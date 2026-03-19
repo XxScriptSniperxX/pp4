@@ -6,4 +6,4 @@ numpy
 plotly
 kaleido
 st-ant-tree
-cv
+cv2
