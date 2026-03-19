@@ -21,7 +21,7 @@ from copy import deepcopy
 # from libs.Grapher import roundabout_specs, uturn_specs, stepsteer_specs, dlc_specs
 from libs.figure_manager import FigureData, ManageData
 from libs.color_manager import ColorManager
-from libs.AA_utils import update_presets_json,load_presets,resend,respect,phunt
+from libs.AA_utils import update_presets_json,load_presets,phunt
 from libs.pptx_porter import pptX_tab
 # from libs.spec_manager import SpecManager
 import matplotlib.pyplot as plt
