@@ -278,6 +278,10 @@ class FigureData:
                 labelspacing=1.2,
                 bbox_to_anchor=(1.0, 0.5),
                 fontsize=STYLE_CONFIG["legend_size"],
+                frameon=True,                      # <-- show bounding box
+                facecolor=page_data["plot_bgcolor"],                 # <-- background color
+                edgecolor=page_data["legend_text_color"],  # <-- border color
+                framealpha=1.0,                   # <-- opacity of box
                 ncol=1
             )
 
@@ -371,6 +375,9 @@ class FigureData:
                         tickfont=dict(color=page_data["tick_label_color"]),
                         gridcolor=page_data["grid_color"],
                         autorange=True,
+                        showline=True,                      # <-- add this
+                        linecolor=page_data["axis_title_color"],  # <-- axis line color
+                        linewidth=2,                        # <-- thickness
                         row=i, col=1
                     )
                     fig.update_yaxes(
@@ -378,9 +385,12 @@ class FigureData:
                         tickfont=dict(color=page_data["tick_label_color"]),
                         gridcolor=page_data["grid_color"],
                         autorange=True,
+                        showline=True,                      # <-- add this
+                        linecolor=page_data["axis_title_color"],  # <-- axis line color
+                        linewidth=2,                        # <-- thickness
                         row=i, col=1
                     )
-
+            #
             fig.update_layout(
                 title=dict(
                     text=f"<b>{page_data.get('title', '')}</b>",
@@ -393,6 +403,7 @@ class FigureData:
                     xanchor="center",
                     xref="paper"
                 ),
+                #margin=dict(r=80),
                 legend=dict(
                     font=dict(
                         size=STYLE_CONFIG["legend_size"],
@@ -400,13 +411,17 @@ class FigureData:
                         color=page_data["legend_text_color"]
                     ),
                     x=1.02, y=0.5,
-                    xanchor="left", yanchor="middle"
+                    xanchor="left", yanchor="middle",
+                    bgcolor=page_data["plot_bgcolor"],   # background for bounding box
+                    bordercolor=page_data["legend_text_color"],               # border color
+                    borderwidth=2                      # thickness of border
                 ),
                 plot_bgcolor=page_data["plot_bgcolor"],
                 paper_bgcolor=page_data["plot_bgcolor"],
                 width=int(fig_width * 100),
-                height=int(fig_height * 100)
+                height=int(fig_height * 100),
             )
+
 
             # crude estimate based on longest label length
             max_label_len = max(len(lbl) for lbl in vehicle_labels) if vehicle_labels else 10
