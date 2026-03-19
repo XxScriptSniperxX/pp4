@@ -1,0 +1,141 @@
+{
+    "plot_presets": {
+        "Preset 1": {
+            "axis_title": "#000000",
+            "tick_label": "#000000",
+            "legend_text": "#000000",
+            "plot_title": "#000000",
+            "plot_bg": "#FFFFFF",
+            "grid": "#DDDDDD",
+            "plot_line_color1": "#ff0000",
+            "plot_line_color2": "#abe400",
+            "plot_line_color3": "#ff7b00",
+            "plot_line_color4": "#892525",
+            "plot_line_color5": "#92b140",
+            "plot_line_color6": "#d714fb",
+            "plot_line_color7": "#27c5dc",
+            "plot_line_color8": "#b79292",
+            "plot_line_color9": "#00ff4a",
+            "plot_line_color10": "#0e00ff",
+            "plot_line_color11": "#fb92ff",
+            "plot_line_color12": "#2e8336",
+            "plot_line_color13": "#d6ff80",
+            "plot_line_color14": "#411d20",
+            "plot_line_color15": "#a85757",
+            "plot_line_color16": "#000000",
+            "use_palette": true
+        },
+        "Preset 2": {
+            "axis_title": "#444444",
+            "tick_label": "#0a0a0a",
+            "legend_text": "#000000",
+            "plot_title": "#000000",
+            "plot_bg": "#ffffff",
+            "grid": "#bfbfbf",
+            "plot_line_color1": "#0173b2",
+            "plot_line_color2": "#de8f05",
+            "plot_line_color3": "#029e73",
+            "plot_line_color4": "#d55e00",
+            "plot_line_color5": "#cc78bc",
+            "plot_line_color6": "#ca9161",
+            "plot_line_color7": "#fbafe4",
+            "plot_line_color8": "#949494",
+            "plot_line_color9": "#ece133",
+            "plot_line_color10": "#56b4e9",
+            "plot_line_color11": "#0173b2",
+            "plot_line_color12": "#de8f05",
+            "plot_line_color13": "#029e73",
+            "plot_line_color14": "#d55e00",
+            "plot_line_color15": "#cc78bc",
+            "plot_line_color16": "#ca9161",
+            "use_palette": true
+        },
+        "Preset 3": {
+            "axis_title": "#FF0000",
+            "tick_label": "#000000",
+            "legend_text": "#000000",
+            "plot_bg": "#FFFFFF",
+            "grid": "#AAAAAA",
+            "line_color": "#FF0000",
+            "palette": [
+                "#FF0000",
+                "#00FF00",
+                "#0000FF"
+            ],
+            "use_palette": false
+        },
+        "Preset 4": {
+            "axis_title": "#0072B2",
+            "tick_label": "#000000",
+            "legend_text": "#000000",
+            "plot_bg": "#FFFFFF",
+            "grid": "#DDDDDD",
+            "line_color": "#0072B2",
+            "palette": [
+                "#0072B2",
+                "#E69F00",
+                "#56B4E9"
+            ],
+            "use_palette": true
+        }
+    },
+    "selected_plot_preset": "Preset 1",
+    "applied_plot_theme": {
+        "axis_title": "#000000",
+        "tick_label": "#000000",
+        "legend_text": "#000000",
+        "plot_title": "#000000",
+        "plot_bg": "#FFFFFF",
+        "grid": "#DDDDDD",
+        "plot_line_color1": "#ff0000",
+        "plot_line_color2": "#abe400",
+        "plot_line_color3": "#ff7b00",
+        "plot_line_color4": "#892525",
+        "plot_line_color5": "#92b140",
+        "plot_line_color6": "#d714fb",
+        "plot_line_color7": "#27c5dc",
+        "plot_line_color8": "#b79292",
+        "plot_line_color9": "#00ff4a",
+        "plot_line_color10": "#0e00ff",
+        "plot_line_color11": "#fb92ff",
+        "plot_line_color12": "#2e8336",
+        "plot_line_color13": "#d6ff80",
+        "plot_line_color14": "#411d20",
+        "plot_line_color15": "#a85757",
+        "plot_line_color16": "#000000",
+        "use_palette": true
+    },
+    "app_presets": {
+        "Preset 1": {
+            "primary": "#E69F00",
+            "text": "#000000",
+            "background": "#FFFFFF",
+            "secondary": "#F0F0F0"
+        },
+        "Preset 2": {
+            "primary": "#444444",
+            "text": "#FFFFFF",
+            "background": "#000000",
+            "secondary": "#222222"
+        },
+        "Preset 3": {
+            "primary": "#FF0000",
+            "text": "#000000",
+            "background": "#FFFFFF",
+            "secondary": "#FFFF00"
+        },
+        "Preset 4": {
+            "primary": "#0072B2",
+            "text": "#000000",
+            "background": "#FFFFFF",
+            "secondary": "#DDDDDD"
+        }
+    },
+    "selected_app_preset": "Preset 1",
+    "applied_app_theme": {
+        "primary": "#E69F00",
+        "text": "#000000",
+        "background": "#FFFFFF",
+        "secondary": "#F0F0F0"
+    }
+}
