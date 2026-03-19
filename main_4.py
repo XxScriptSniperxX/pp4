@@ -13,7 +13,8 @@ import pickle
 from copy import deepcopy
 from libs.figure_manager import FigureData, ManageData
 from libs.color_manager import ColorManager
-from libs.AA_utils import update_presets_json, load_presets, resend, respect
+from libs.AA_utils import update_presets_json, load_presets, resend, respect, phunt
+from libs.pptx_porter import pptX_tab
 import matplotlib.pyplot as plt
 from pptx import Presentation
 from pptx.util import Inches
@@ -21,151 +22,11 @@ from PIL import Image
 from datetime import datetime
 import shutil
 import kaleido
+
 kaleido.start_sync_server(n=5)
 
-def print_placeholders(slide, slide_name=""):
-    print(f"\n--- Placeholders for {slide_name} ---")
-    for idx, ph in enumerate(slide.placeholders):
-        try:
-            print(f"Index {idx} → placeholder idx {ph.placeholder_format.idx}, type={ph.placeholder_format.type}")
-        except Exception as e:
-            print(f"Index {idx} → error: {e}")
 
-
-
-@st.fragment
-def ppt_export_section():
-    st.subheader("Export PowerPoint Presentation")
-
-    # Maneuver selection checkboxes
-    chosen = {}
-    for m in st.session_state["tabs"].keys():
-        chosen[m] = st.checkbox(f"Maneuver {m}", value=True, key=f"chk_{m}")
-
-    # File settings
-    directory = st.text_input("Directory:", key="ppt_directory",
-                              value=r"C:\\project files\\General_PostP_tool\\scratch\\out")
-    filename = st.text_input("Name:", key="ppt_filename", value="Unyblyat")
-    template_path = st.text_input("Template path:", key="ppt_template",
-                                  value=r"C:\\project files\\General_PostP_tool\\scratch\\template.pptx")
-
-    col_main, col_settings = st.columns([3,1])
-    with col_settings:
-        with st.expander("⚙️ Settings", expanded=False):
-            cutfactor_1d = st.number_input("Cut factor 1D", min_value=0.1, max_value=5.0,
-                                           value=1.4, step=0.1, key="cutfactor_1d")
-            cutfactor_2d = st.number_input("Cut factor 2D", min_value=0.1, max_value=10.0,
-                                           value=7.5, step=0.1, key="cutfactor_2d")
-
-    # Export button
-    if st.button("Export", key="ppt_export"):
-        selected = [m for m, v in chosen.items() if v]
-        if not selected:
-            st.warning("Please select at least one maneuver.")
-        elif not directory or not filename or not template_path:
-            st.warning("Please provide directory, filename, and template path.")
-        else:
-            prs = Presentation(template_path)
-
-            # Create temporary folder for PNGs
-            temp_dir = os.path.join(directory, "ppt_temp_images")
-            os.makedirs(temp_dir, exist_ok=True)
-
-            # First slide (cover)
-            first_layout = prs.slide_layouts[0]
-            first_slide = prs.slides.add_slide(first_layout)
-            first_slide.placeholders[0].text = filename
-            today_str = datetime.today().strftime("%d %B %Y")
-            first_slide.placeholders[1].text = today_str
-
-            # Overview slide
-            overview_layout = prs.slide_layouts[2]
-            overview_slide = prs.slides.add_slide(overview_layout)
-            overview_slide.placeholders[11].text = filename
-            for i, maneuver_id in enumerate(selected[:8], start=1):
-                title_idx = 18 + (i - 1) * 2
-                num_idx = title_idx + 1
-                overview_slide.placeholders[title_idx].text = maneuver_id
-                overview_slide.placeholders[num_idx].text = f"{i:02d}"
-            for j in range(len(selected) + 1, 9):
-                title_idx = 18 + (j - 1) * 2
-                num_idx = title_idx + 1
-                for idx in (title_idx, num_idx):
-                    try:
-                        ph = overview_slide.placeholders[idx]
-                        ph.element.getparent().remove(ph.element)
-                    except IndexError:
-                        break
-
-            # Chapter title slides
-            for i, maneuver_id in enumerate(selected, start=1):
-                figures = st.session_state["tabs"][maneuver_id]["figures"]
-                title_layout = prs.slide_layouts[3]
-                title_slide = prs.slides.add_slide(title_layout)
-                title_slide.placeholders[14].text = f"{i:02d}"
-                title_slide.placeholders[15].text = maneuver_id
-
-                # Maneuver export slides
-                for idx, figdata in enumerate(figures):
-                    fig, split_ratio = figdata.render_page(
-                        page_data=figdata.page_data,
-                        vehicle_labels=st.session_state["impostors"].get(maneuver_id, {}).get(f"Page_{idx}", []),
-                        cutfactor_1d=cutfactor_1d,
-                        cutfactor_2d=cutfactor_2d
-                    )
-
-                    base_img_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_full.png")
-                    if isinstance(fig, plt.Figure):
-                        fig.savefig(base_img_path, dpi=300, bbox_inches="tight")
-                        plt.close(fig)
-                    else:
-                        fig.write_image(base_img_path, scale=2)
-
-                    img = Image.open(base_img_path)
-                    w, h = img.size
-                    plot_crop = img.crop((0, 0, int(w * split_ratio), h))
-                    legend_crop = img.crop((int(w * split_ratio), 0, w, h))
-                    plot_resized = respect(plot_crop, (854, 586))
-                    plot_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_plot.png")
-                    plot_resized.save(plot_path)
-                    legend_resized = resend(legend_crop, target_width_px=348, target_height_px=344)
-                    legend_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_legend.png")
-                    legend_resized.save(legend_path)
-
-                    slide_layout = prs.slide_layouts[4]
-                    slide = prs.slides.add_slide(slide_layout)
-                    try:
-                        slide.placeholders[11].text = f"{maneuver_id} - {figdata.page_data.get('title', f'Page{idx}')}"
-                    except KeyError:
-                        pass
-                    try:
-                        slide.placeholders[16].insert_picture(plot_path)
-                    except KeyError:
-                        slide.shapes.add_picture(plot_path, Inches(0.5), Inches(1.5),
-                                                 width=Inches(8.9), height=Inches(6.1))
-                    try:
-                        slide.placeholders[17].insert_picture(legend_path)
-                    except KeyError:
-                        slide.shapes.add_picture(legend_path, Inches(6.0), Inches(1.5))
-
-            Last_layout = prs.slide_layouts[9]
-            # Last_slide = prs.slides.add_slide(Last_layout)
-            ppt_path = os.path.join(directory, f"{filename}.pptx")
-            prs.save(ppt_path)
-
-            # Clean up temporary folder
-            try:
-                shutil.rmtree(temp_dir)
-            except Exception as e:
-                st.warning(f"Could not delete temp folder: {e}")
-            st.success(f"PPT exported: {ppt_path}")
-
-
-
-# from libs.AA_utils import process_data, render_page
-# reload(SpecManager)
 st.markdown('<div id="top"></div>', unsafe_allow_html=True)
-# --- Load presets at startup ---
 if "app_presets" not in st.session_state or "plot_presets" not in st.session_state:
     presets = load_presets()
     for k, v in presets.items():
@@ -341,7 +202,17 @@ st.markdown(
     div[data-testid="stFileUploaderDropzoneInstructions"] svg {{
         fill: {global_color_manager.text} !important;
     }}
-
+    /* ---------------- TOAST ---------------- */
+    div.stToast {{
+        background-color: {global_color_manager.secondary} !important;
+        color: {global_color_manager.text} !important;
+        border-radius: 6px;
+        padding: 8px;
+    }}
+    div.stToast p {{
+        color: {global_color_manager.text} !important;
+        font-weight: bold;
+    }}
     /* ---------------- EXPANDERS ---------------- */
     details > summary {{
         background-color: {global_color_manager.secondary} !important;
@@ -469,11 +340,6 @@ if st.session_state.get("datasets"):
     with st.sidebar.expander("Aliases", expanded=False):
         for idx, file_name in enumerate(st.session_state["datasets"].keys()):
             alias_key = f"alias_{idx}_{file_name}"
-            # default_val = st.session_state.get("aliases", {}).get(file_name, file_name)
-            # if alias_key not in st.session_state:
-                # st.session_state[alias_key] = default_val
-
-            # Store alias directly in aliases dict
             new_alias = st.text_input(f"{file_name}", key=alias_key)
             st.session_state.setdefault("aliases", {})
             st.session_state["aliases"][file_name] = new_alias
@@ -505,19 +371,19 @@ if st.sidebar.button("🚀 Let's Roll", use_container_width=True):
 
             # Build alias mapping from session state
             aliases_map = st.session_state.get("aliases", {})
-            # Step 1: classify, now passing aliases
             data_inputs = list(st.session_state["datasets"].values())
-            classified_output, impostors = st.session_state["managedata"].process_data(
+            classified_output, impostors, stowaways = st.session_state["managedata"].process_data(
                 data_inputs,
                 format_map,
                 format_folder=format_folder,
                 aliases=aliases_map
             )
-
+            phunt(impostors,name="imps")
 
             # Save both outputs into session state
             st.session_state["classified_output"] = classified_output
             st.session_state["impostors"] = impostors   # <-- this was missing
+            st.session_state["stowaways"] = stowaways 
             with open("classified_output.pkl", "wb") as f:
                 pickle.dump((classified_output,impostors), f)
 
@@ -555,14 +421,6 @@ if "tabs" in st.session_state and "impostors" in st.session_state:
         with tab:
             st.subheader(f"Simulation Results for: {maneuver_id}")
             for idx, figdata in enumerate(st.session_state["tabs"][maneuver_id]["figures"], start=0):
-                # try:
-                #     spec_manager = SpecManager(figdata)
-                #     spec_manager.build_ui()
-                #     spec_manager.apply_updates()
-                #     figdata = spec_manager.figdata
-                # except TypeError:
-                #     st.warning("No Plot theme applied. Please select a color(s) manually.")
-
                 page_name = figdata.page_data.get("title", f"Page{idx}")
                 vehicle_labels = st.session_state["impostors"].get(maneuver_id, {}).get(f"Page_{idx}", [])
                 fig,dump = figdata.render_page(page_data=figdata.page_data, vehicle_labels=vehicle_labels)
@@ -570,31 +428,49 @@ if "tabs" in st.session_state and "impostors" in st.session_state:
                 if isinstance(fig, plt.Figure):
                     st.pyplot(fig)
                 else:
-                    # 🔹 Add a unique key so relayoutData is tracked
                     st.plotly_chart(fig, use_container_width=True, key=f"chart_{maneuver_id}_{idx}")
-
-                    # Capture zoom/pan state
-                    # relayout = st.session_state.get(f"chart_{maneuver_id}_{idx}", {}).get("relayoutData", {})
-                    # print(relayout)
-                    # if "xaxis.range[0]" in relayout and "xaxis.range[1]" in relayout:
-                        # st.session_state[f"zoom_x_{maneuver_id}_{idx}"] = (
-                            # relayout["xaxis.range[0]"], relayout["xaxis.range[1]"]
-                        # )
-                    # if "yaxis.range[0]" in relayout and "yaxis.range[1]" in relayout:
-                        # st.session_state[f"zoom_y_{maneuver_id}_{idx}"] = (
-                            # relayout["yaxis.range[0]"], relayout["yaxis.range[1]"]
-                        # )
-
-                st.markdown("<br><br>", unsafe_allow_html=True) 
+                st.markdown("<br><br>", unsafe_allow_html=True)
+    if "default_selected" not in st.session_state:
+        default_mapping = {
+            "DA80_Kph_LH": {
+                "0": ["DA_80kph_LH__linear_slope_understeer"],
+                "3": ["DA_80kph_LH__linear_slope_spe_rear_slip"],
+                "4": ["DA_80kph_LH__characteristic_speed"],
+            },
+            "DA80DAGene": {
+                "5": ["DA80DAGene_DAGeneWob__accy_stw_response_1Hz"],
+                "17": ["DA80DAGene_DAGeneWob__yaw_stw_response_1Hz"],
+                "19": ["DA80DAGene_DAGeneWob__roll_stw_response_1Hz"],
+                "20": ["DA80DAGene_DAGeneWob__accy_yaw_response_1Hz"],
+            },
+        }
+    
+        default_selected = []
+    
+        # Only add defaults if the maneuver/page/stowaway exists in current session
+        for maneuver, pages in default_mapping.items():
+            if maneuver in st.session_state["tabs"]:  # check maneuver exists
+                for page_no, stowaways in pages.items():
+                    # check page index is valid
+                    if int(page_no) < len(st.session_state["tabs"][maneuver]["figures"]):
+                        # check stowaway keys exist
+                        stowaway_dict = st.session_state.get("stowaways", {}).get(maneuver, {})
+                        if isinstance(stowaway_dict, dict):
+                            for st_key in stowaways:
+                                if st_key in stowaway_dict:
+                                    val = f"man{maneuver}_page{page_no}_{st_key}"
+                                    default_selected.append(val)
+                        elif isinstance(stowaway_dict, list):
+                            for st_key in stowaways:
+                                if st_key in stowaway_dict:
+                                    val = f"man{maneuver}_page{page_no}_{st_key}"
+                                    default_selected.append(val)
+    
+        st.session_state["default_selected"] = default_selected
     # --- PPT export tab ---
-    # Call inside your tab loop
     with tabs[-1]:
-        ppt_export_section()
-        # st.button("update", key="onckle")
+        pptX_tab()
 
-
-
-# Place this once in your script (anywhere after st imports)
 st.markdown("""
     <style>
     html {
