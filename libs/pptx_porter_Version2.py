@@ -343,19 +343,25 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
 
         base_img_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_full.png")
         
-        # Save figure based on type - OPTIMIZED
+        # Save figure based on type - FIXED
         try:
             if isinstance(fig, plt.Figure):
-                fig.savefig(base_img_path, dpi=DEFAULT_DPI, bbox_inches="tight", 
-                           format='png', optimize=True)
+                # Matplotlib figure - no optimize parameter
+                fig.savefig(base_img_path, dpi=DEFAULT_DPI, bbox_inches="tight", format='png')
                 plt.close(fig)
+                # Optimize AFTER saving
+                optimize_image(base_img_path, quality=85)
             else:
-                fig.write_image(base_img_path, scale=1)  # REDUCED from 2
+                # Plotly or other figure type
+                fig.write_image(base_img_path, scale=1)
+                # Optimize after save
+                optimize_image(base_img_path, quality=85)
+                
                 img = Image.open(base_img_path)
                 w, h = img.size
                 margin = 50
                 figcrop = img.crop((margin, 0, w, h))
-                figcrop.save(base_img_path, optimize=True)
+                figcrop.save(base_img_path)
                 img.close()
 
             # Legend detection and splitting
@@ -369,11 +375,11 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             # Resize images with optimization
             plot_resized = respect(plot_crop, DEFAULT_PLOT_SIZE)
             plot_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_plot.png")
-            plot_resized.save(plot_path, optimize=True, quality=85)
-
+            plot_resized.save(plot_path, quality=85)  # PNG doesn't use quality, but harmless
+            
             legend_resized = resend(legend_crop, *DEFAULT_LEGEND_SIZE)
             legend_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_legend.png")
-            legend_resized.save(legend_path, optimize=True, quality=85)
+            legend_resized.save(legend_path, quality=85)
 
             img.close()
             plot_crop.close()
@@ -416,6 +422,8 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
 
         except Exception as e:
             st.error(f"Error processing {maneuver_id} Page {idx}: {str(e)}")
+            import traceback
+            st.error(traceback.format_exc())
             continue
 
 # ============================================================================
