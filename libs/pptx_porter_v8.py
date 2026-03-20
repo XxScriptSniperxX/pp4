@@ -551,8 +551,7 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
                 left_padding=LEGEND_PADDING['left'],
                 right_padding=LEGEND_PADDING['right'],
                 top_padding=LEGEND_PADDING['top'],
-                bottom_padding=LEGEND_PADDING['bottom'],is_plotly
-            )
+                bottom_padding=LEGEND_PADDING['bottom'],is_plotly)
             
             # STEP 6: CONVERT cv2 -> PIL
             plot_pil = cv2_to_pil(plot_bgr)
