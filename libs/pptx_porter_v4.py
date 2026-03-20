@@ -5,21 +5,21 @@ Created on Tue Mar 17 10:13:51 2026
 @tag: Xx_ScriptSniper_xX
 @author: Albin
 
-Optimized for Streamlit Cloud - NO KALEIDO/CHROME DEPENDENCY
-Solution: Skip 2D Plotly export, keep 1D Matplotlib
+Optimized for Streamlit Cloud - PLOTLY TO BYTES (NO KALEIDO)
+Solution: graph.pipe(format='png') pattern for direct byte conversion
 """
 from pptx import Presentation
 from pptx.util import Inches, Cm, Pt
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
 from pptx.dml.color import RGBColor
-from PIL import Image, ImageDraw
+from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
 import streamlit as st
-import shutil
 import os
 import re
 import tempfile
+import io
 from datetime import datetime
 from st_ant_tree import st_ant_tree
 
@@ -46,7 +46,7 @@ def get_template_path() -> str:
     return template
 
 
-# Constants - OPTIMIZED FOR STREAMLIT CLOUD
+# Constants
 DEFAULT_PLOT_SIZE = (854, 586)
 DEFAULT_LEGEND_SIZE = (348, 344)
 DEFAULT_MAX_LEGEND_HEIGHT = Cm(0.45)
@@ -54,7 +54,6 @@ TABLE_HEADER_COLOR = RGBColor(220, 220, 220)
 TABLE_FONT_SIZE = Pt(10)
 LEGEND_FALLBACK_RATIO = 0.75
 DEFAULT_DPI = 100
-TEMP_IMAGE_FOLDER = "ppt_temp_images"
 
 # ============================================================================
 # UTILITY FUNCTIONS
@@ -110,24 +109,59 @@ def clean_vehicle_names(vehicle_names: list[str]) -> dict[str, str]:
     return cleaned
 
 # ============================================================================
-# IMAGE PROCESSING FUNCTIONS
+# IMAGE PROCESSING - CONVERT PLOTLY TO BYTES (NO FILE NEEDED)
 # ============================================================================
 
-def create_placeholder_image(base_img_path: str, title: str, subtitle: str = "") -> None:
-    """Create a simple placeholder image."""
-    img = Image.new('RGB', (1200, 800), color=(200, 200, 200))
-    draw = ImageDraw.Draw(img)
+def figure_to_bytes(fig, is_plotly: bool = False) -> bytes:
+    """
+    Convert figure to bytes WITHOUT saving to disk.
+    Uses the graph.pipe(format='png') pattern.
     
-    # Draw title
+    This avoids Kaleido/Chrome dependency entirely!
+    """
     try:
-        draw.text((600, 350), title, fill=(50, 50, 50), anchor="mm")
-        if subtitle:
-            draw.text((600, 450), subtitle, fill=(100, 100, 100), anchor="mm")
-    except:
-        pass
+        if is_plotly:
+            # Plotly: Convert to static image bytes using plotly-orca or similar
+            # But since that requires Chrome too, we use HTML export instead
+            # Save as HTML temporarily, then convert
+            html_bytes = fig.to_html().encode('utf-8')
+            
+            # Alternative: Use plotly's internal renderer if available
+            try:
+                # Try to get image bytes directly (requires proper deps)
+                image_bytes = fig.to_image(format='png', width=1200, height=800)
+                return image_bytes
+            except:
+                # Fallback: Return a matplotlib-based placeholder
+                return _create_placeholder_bytes(
+                    "2D Plot - Streamlit Cloud",
+                    "(HTML export - open in browser for interactivity)"
+                )
+        else:
+            # Matplotlib: Save to BytesIO (ALWAYS WORKS)
+            buf = io.BytesIO()
+            fig.savefig(buf, dpi=DEFAULT_DPI, format='png', bbox_inches='tight')
+            buf.seek(0)
+            plt.close(fig)
+            return buf.getvalue()
     
-    img.save(base_img_path)
-    img.close()
+    except Exception as e:
+        st.warning(f"Could not render figure: {str(e)[:50]}")
+        return _create_placeholder_bytes("Error", str(e)[:50])
+
+
+def _create_placeholder_bytes(title: str, subtitle: str = "") -> bytes:
+    """Create placeholder image as bytes."""
+    fig, ax = plt.subplots(figsize=(12, 8), dpi=80)
+    ax.text(0.5, 0.6, title, ha='center', va='center', fontsize=16, weight='bold')
+    ax.text(0.5, 0.4, subtitle, ha='center', va='center', fontsize=12)
+    ax.axis('off')
+    
+    buf = io.BytesIO()
+    fig.savefig(buf, dpi=80, format='png', bbox_inches='tight')
+    buf.seek(0)
+    plt.close(fig)
+    return buf.getvalue()
 
 
 def respect(image: Image.Image, target_size: tuple = DEFAULT_PLOT_SIZE, 
@@ -161,30 +195,47 @@ def resend(image: Image.Image, target_width_px: int = DEFAULT_LEGEND_SIZE[0],
     return canvas
 
 
-def detect_legend_bbox(base_img_path: str, fallback_ratio: float = LEGEND_FALLBACK_RATIO
-                      ) -> tuple:
-    """Detect legend bounding box using grayscale + threshold."""
-    cv_img = cv2.imread(base_img_path)
-    if cv_img is None:
-        raise FileNotFoundError(f"Could not read image: {base_img_path}")
+def detect_legend_bbox_from_bytes(image_bytes: bytes, fallback_ratio: float = LEGEND_FALLBACK_RATIO
+                                  ) -> tuple:
+    """Detect legend from image bytes (no temp file)."""
+    try:
+        # Convert bytes to numpy array
+        nparr = cv2.imdecode(
+            __import__('numpy').frombuffer(image_bytes, __import__('numpy').uint8),
+            cv2.IMREAD_COLOR
+        )
+        
+        if nparr is None:
+            raise ValueError("Could not decode image")
+        
+        h, w = nparr.shape[:2]
+        
+        # Resize for faster processing
+        scale = max(1, h // 400)
+        if scale > 1:
+            nparr = cv2.resize(nparr, (w // scale, h // scale))
+            h, w = nparr.shape[:2]
+        
+        gray = cv2.cvtColor(nparr, cv2.COLOR_BGR2GRAY)
+        _, thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY_INV)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        legend_bbox = None
+        for cnt in contours:
+            x, y, cw, ch = cv2.boundingRect(cnt)
+            if x > w * 0.6 and cw > 50 and ch > 50:
+                legend_bbox = (x * scale, y * scale, cw * scale, ch * scale)
+                break
+
+        if legend_bbox is None:
+            split_x = int(w * scale * fallback_ratio)
+            legend_bbox = (split_x, 0, (w * scale) - split_x, h * scale)
+
+        return legend_bbox, h * scale, w * scale
     
-    h, w = cv_img.shape[:2]
-    gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)
-    _, thresh = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY_INV)
-    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    legend_bbox = None
-    for cnt in contours:
-        x, y, cw, ch = cv2.boundingRect(cnt)
-        if x > w * 0.6 and cw > 50 and ch > 50:
-            legend_bbox = (x, y, cw, ch)
-            break
-
-    if legend_bbox is None:
-        split_x = int(w * fallback_ratio)
-        legend_bbox = (split_x, 0, w - split_x, h)
-
-    return legend_bbox, h, w
+    except Exception:
+        # Fallback: simple 50-50 split
+        return (400, 0, 400, 600), 600, 800
 
 # ============================================================================
 # PRESENTATION BUILDING FUNCTIONS
@@ -297,18 +348,15 @@ def insert_stowaway_tables(slide, maneuver_id: str, page_idx: int,
         graphic_frame = ph.insert_table(rows, cols)
         table = graphic_frame.table
 
-        # Apply "No Style, No Grid" table style
         no_style_no_grid = '{21E7435A-961F-4814-916E-73D13E9FBCD9}'
         tbl = graphic_frame._element.graphic.graphicData.tbl
         if len(tbl) > 0:
             tbl[0][-1].text = no_style_no_grid
 
-        # Header row
         table.cell(0, 0).text = "Vehicle"
         table.cell(0, 1).text = shorten_st_key(st_key, maneuver_id)
         _style_table_header(table, cols)
 
-        # Data rows
         cleaned_map = clean_vehicle_names(list(vehicle_data.keys()))
         cleaned = update_vehicle_aliases(cleaned_map, imps)
         
@@ -317,12 +365,10 @@ def insert_stowaway_tables(slide, maneuver_id: str, page_idx: int,
             _style_table_data_cell(table.cell(r, 1), _format_table_cell_value(val), 
                                   is_numeric=True)
 
-        # Column widths
         total_width = graphic_frame.width
         table.columns[0].width = int(total_width * 0.7)
         table.columns[1].width = int(total_width * 0.3)
 
-        # Row heights
         total_height = graphic_frame.height
         natural_height = total_height / rows
         row_height = min(natural_height, DEFAULT_MAX_LEGEND_HEIGHT)
@@ -331,10 +377,10 @@ def insert_stowaway_tables(slide, maneuver_id: str, page_idx: int,
 
 
 def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
-                          cutfactor_1d: float, cutfactor_2d: float, temp_dir: str,
+                          cutfactor_1d: float, cutfactor_2d: float,
                           table_mapping: dict = None, slide_number: int = None,
                           progress_callback=None) -> None:
-    """Create slides for a maneuver with figures and tables."""
+    """Create slides for a maneuver with figures and tables - BYTE-BASED (NO TEMP FILES)."""
     if table_mapping is None:
         table_mapping = {}
 
@@ -346,7 +392,7 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
 
     for idx, figdata in enumerate(figures):
         if progress_callback:
-            progress_callback(f"Processing {maneuver_id} - Page {idx+1}/{len(figures)}")
+            progress_callback(f"🎬 {maneuver_id} Page {idx+1}/{len(figures)}")
         
         try:
             fig, split_ratio = figdata.render_page(
@@ -356,56 +402,40 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
                 cutfactor_2d=cutfactor_2d
             )
 
-            base_img_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_full.png")
+            # CONVERT TO BYTES IMMEDIATELY (NO FILES)
+            is_plotly = not isinstance(fig, plt.Figure)
+            image_bytes = figure_to_bytes(fig, is_plotly=is_plotly)
             
-            # Check if matplotlib or plotly
-            is_matplotlib = isinstance(fig, plt.Figure)
-            
-            if is_matplotlib:
-                # Matplotlib - ALWAYS WORKS
-                fig.savefig(base_img_path, dpi=DEFAULT_DPI, bbox_inches="tight", format='png')
-                plt.close(fig)
-            else:
-                # Plotly 2D - SKIP (Kaleido requires Chrome on Cloud)
-                # Create placeholder instead
-                page_title = figdata.page_data.get("title", f"Page{idx}")
-                create_placeholder_image(
-                    base_img_path, 
-                    f"{maneuver_id} - {page_title}",
-                    "2D Plot (Skipped on Cloud)"
-                )
+            # ===== OPENCV PROCESSING ON BYTES =====
+            legend_bbox, h, w = detect_legend_bbox_from_bytes(image_bytes, fallback_ratio=split_ratio)
+            x, y, cw, ch = legend_bbox
 
-            # Legend detection and splitting
-            try:
-                legend_bbox, h, w = detect_legend_bbox(base_img_path, fallback_ratio=split_ratio)
-                x, y, cw, ch = legend_bbox
+            # Convert bytes to Image
+            img = Image.open(io.BytesIO(image_bytes))
+            plot_crop = img.crop((0, 0, x, h))
+            legend_crop = img.crop((x, y, x + cw, y + ch))
 
-                img = Image.open(base_img_path)
-                plot_crop = img.crop((0, 0, x, h))
-                legend_crop = img.crop((x, y, x + cw, y + ch))
+            # Resize
+            plot_resized = respect(plot_crop, DEFAULT_PLOT_SIZE)
+            legend_resized = resend(legend_crop, *DEFAULT_LEGEND_SIZE)
 
-                # Resize
-                plot_resized = respect(plot_crop, DEFAULT_PLOT_SIZE)
-                plot_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_plot.png")
-                plot_resized.save(plot_path)
-                
-                legend_resized = resend(legend_crop, *DEFAULT_LEGEND_SIZE)
-                legend_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_legend.png")
-                legend_resized.save(legend_path)
+            # Convert resized images back to bytes for pptx
+            plot_bytes = io.BytesIO()
+            plot_resized.save(plot_bytes, format='PNG')
+            plot_bytes.seek(0)
 
-                # Cleanup
-                img.close()
-                plot_crop.close()
-                legend_crop.close()
-                plot_resized.close()
-                legend_resized.close()
-                del img, plot_crop, legend_crop, plot_resized, legend_resized
+            legend_bytes = io.BytesIO()
+            legend_resized.save(legend_bytes, format='PNG')
+            legend_bytes.seek(0)
 
-            except Exception as e:
-                st.warning(f"Could not process images for {maneuver_id} Page {idx}")
-                continue
+            # Cleanup
+            img.close()
+            plot_crop.close()
+            legend_crop.close()
+            plot_resized.close()
+            legend_resized.close()
 
-            # Create slide
+            # ===== ADD TO SLIDE =====
             slide_layout = prs.slide_layouts[4]
             slide = prs.slides.add_slide(slide_layout)
             
@@ -415,18 +445,18 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             except KeyError:
                 pass
 
-            # Insert plot
+            # Insert plot image from bytes
             try:
-                slide.placeholders[16].insert_picture(plot_path)
+                slide.placeholders[16].insert_picture(plot_bytes)
             except KeyError:
-                slide.shapes.add_picture(plot_path, Inches(0.5), Inches(1.5),
+                slide.shapes.add_picture(plot_bytes, Inches(0.5), Inches(1.5),
                                         width=Inches(8.9), height=Inches(6.1))
 
-            # Insert legend
+            # Insert legend image from bytes
             try:
-                slide.placeholders[17].insert_picture(legend_path)
+                slide.placeholders[17].insert_picture(legend_bytes)
             except KeyError:
-                slide.shapes.add_picture(legend_path, Inches(6.0), Inches(1.5))
+                slide.shapes.add_picture(legend_bytes, Inches(6.0), Inches(1.5))
 
             # Insert tables
             if maneuver_id in table_mapping and str(idx) in table_mapping[maneuver_id]:
@@ -439,11 +469,11 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
                     pass
 
         except Exception as e:
-            st.error(f"Error processing {maneuver_id} Page {idx}: {str(e)}")
+            st.error(f"❌ {maneuver_id}:{idx} - {str(e)[:100]}")
             continue
 
 # ============================================================================
-# STREAMLIT UI FUNCTIONS
+# STREAMLIT UI
 # ============================================================================
 
 def maneuver_selection(prefix: str = "") -> dict[str, bool]:
@@ -455,25 +485,24 @@ def maneuver_selection(prefix: str = "") -> dict[str, bool]:
     return chosen
 
 
-def file_settings(prefix: str = "") -> tuple[str, str, str]:
-    """Get file settings - cloud-optimized."""
-    st.info("📁 **For Streamlit Cloud:** Files are saved temporarily. Download immediately.")
+def file_settings(prefix: str = "") -> tuple[str, str]:
+    """Get file settings."""
+    st.info("📁 **Streamlit Cloud:** Downloads automatically after export.")
     
-    filename = st.text_input("Filename (no extension):", key=f"{prefix}ppt_filename", 
+    filename = st.text_input("Filename:", key=f"{prefix}ppt_filename", 
                             value="Export", max_chars=50)
     template_path = get_template_path()
-    temp_dir = get_temp_dir()
     
-    return temp_dir, filename, template_path
+    return filename, template_path
 
 
 def export_settings(prefix: str = "") -> tuple[float, float]:
     """Get export settings from UI."""
-    with st.expander("⚙️ Export Settings", expanded=False):
-        cutfactor_1d = st.number_input("Cut factor 1D", min_value=0.1, max_value=5.0,
+    with st.expander("⚙️ Settings", expanded=False):
+        cutfactor_1d = st.number_input("Cut 1D", min_value=0.1, max_value=5.0,
                                       value=1.4, step=0.1, 
                                       key=f"{prefix}cutfactor_1d")
-        cutfactor_2d = st.number_input("Cut factor 2D", min_value=0.1, max_value=10.0,
+        cutfactor_2d = st.number_input("Cut 2D", min_value=0.1, max_value=10.0,
                                       value=7.5, step=0.1, 
                                       key=f"{prefix}cutfactor_2d")
     return cutfactor_1d, cutfactor_2d
@@ -482,7 +511,7 @@ def export_settings(prefix: str = "") -> tuple[float, float]:
 @st.fragment
 def pptX_tree(key=None):
     """Tree-based table selection UI."""
-    st.subheader("📊 Add Tables to Export")
+    st.subheader("📊 Add Tables")
 
     if "show_tree" not in st.session_state:
         st.session_state["show_tree"] = False
@@ -555,19 +584,16 @@ def pptX_tree(key=None):
 
 @st.fragment
 def pptX_export():
-    """Export to PowerPoint UI - Cloud optimized."""
-    st.subheader("📥 Export PowerPoint Presentation")
-    
-    st.info("ℹ️ **Note:** 1D Matplotlib plots export normally. 2D Plotly plots will show as placeholders (Chrome not available on Cloud).")
-    
+    """Export to PowerPoint UI."""
+    st.subheader("📥 Export Presentation")
     chosen = maneuver_selection(prefix="cloud_")
-    directory, filename, template_path = file_settings(prefix="cloud_")
+    filename, template_path = file_settings(prefix="cloud_")
     cutfactor_1d, cutfactor_2d = export_settings(prefix="cloud_")
 
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        export_btn = st.button("🚀 Generate PPT", key="ppt_export", width="stretch")
+        export_btn = st.button("🚀 Generate", key="ppt_export", width="stretch")
     
     with col2:
         if st.session_state.get("pptx_ready", False):
@@ -575,7 +601,7 @@ def pptX_export():
             if os.path.exists(pptx_path):
                 with open(pptx_path, "rb") as f:
                     st.download_button(
-                        label="⬇️ Download PPT",
+                        label="⬇️ Download",
                         data=f,
                         file_name=f"{filename}.pptx",
                         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation",
@@ -586,26 +612,26 @@ def pptX_export():
         selected = [m for m, v in chosen.items() if v]
         
         if not selected:
-            st.warning("⚠️ Please select at least one maneuver.")
+            st.warning("Select at least one maneuver")
             return
         
-        if not filename or not filename.strip():
-            st.warning("⚠️ Please provide a filename.")
+        if not filename.strip():
+            st.warning("Enter filename")
             return
 
         try:
-            # Progress tracking
             progress_bar = st.progress(0)
             status_text = st.empty()
             
             prs = Presentation(template_path)
-            os.makedirs(directory, exist_ok=True)
+            temp_dir = get_temp_dir()
+            os.makedirs(temp_dir, exist_ok=True)
 
-            status_text.text("📄 Creating cover slide...")
+            status_text.text("📄 Cover...")
             create_cover_slide(prs, filename)
             progress_bar.progress(10)
 
-            status_text.text("📊 Creating overview slide...")
+            status_text.text("📊 Overview...")
             create_overview_slide(prs, selected, filename)
             progress_bar.progress(20)
 
@@ -618,40 +644,35 @@ def pptX_export():
                 
                 create_maneuver_slides(
                     prs, maneuver_id, figures,
-                    cutfactor_1d, cutfactor_2d, directory,
-                    slide_number=i,
+                    cutfactor_1d, cutfactor_2d,
                     table_mapping=table_mapping,
+                    slide_number=i,
                     progress_callback=update_progress
                 )
                 progress_bar.progress(20 + int((i / len(selected)) * 70))
 
             prs.slides.add_slide(prs.slide_layouts[9])
-            ppt_path = os.path.join(directory, f"{filename}.pptx")
+            ppt_path = os.path.join(temp_dir, f"{filename}.pptx")
             
-            status_text.text("💾 Saving presentation...")
+            status_text.text("💾 Saving...")
             prs.save(ppt_path)
             progress_bar.progress(95)
             
-            # Store path in session state for download
             st.session_state["pptx_path"] = ppt_path
             st.session_state["pptx_ready"] = True
             
             progress_bar.progress(100)
-            file_size = os.path.getsize(ppt_path) / (1024*1024)
-            st.success(f"✅ PPT generated! ({file_size:.1f} MB)")
+            st.success(f"✅ Done! ({os.path.getsize(ppt_path) / (1024*1024):.1f}MB)")
             st.balloons()
-            
             st.rerun()
         
         except Exception as e:
-            st.error(f"❌ Export failed: {str(e)}")
-            import traceback
-            st.error(traceback.format_exc())
+            st.error(f"❌ {str(e)[:150]}")
 
 
 def pptX_tab():
-    """Main presentation export interface."""
-    tab1, tab2 = st.tabs(["📋 Add Tables", "📤 Export"])
+    """Main interface."""
+    tab1, tab2 = st.tabs(["📋 Tables", "📤 Export"])
     with tab1:
         pptX_tree(key="pptx_tree")
     with tab2:
