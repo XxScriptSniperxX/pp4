@@ -369,7 +369,11 @@ class FigureData:
                             ), row=i, col=1)
 
                     fig.update_xaxes(
-                        title=dict(text=sg.get("xAxisTitle", ""), font=dict(color=page_data["axis_title_color"])),
+                        title=dict(text=sg.get("xAxisTitle", ""), 
+                            font=dict(color=page_data["axis_title_color"],
+                            size=STYLE_CONFIG['axis_label_size'],
+                            family=STYLE_CONFIG["font_family"],)
+                            ),
                         type="log" if sg.get("x_axis_log_scale", False) else "linear",
                         tickangle=tick_angle,
                         tickfont=dict(color=page_data["tick_label_color"]),
@@ -381,7 +385,11 @@ class FigureData:
                         row=i, col=1
                     )
                     fig.update_yaxes(
-                        title=dict(text=sg.get("yAxisTitle", ""), font=dict(color=page_data["axis_title_color"])),
+                        title=dict(text=sg.get("yAxisTitle", ""), 
+                            font=dict(color=page_data["axis_title_color"],
+                            size=STYLE_CONFIG['axis_label_size'],
+                            family=STYLE_CONFIG["font_family"],)
+                            ),
                         tickfont=dict(color=page_data["tick_label_color"]),
                         gridcolor=page_data["grid_color"],
                         autorange=True,
@@ -397,7 +405,7 @@ class FigureData:
                     font=dict(
                         size=STYLE_CONFIG["page_title_size"],
                         family=STYLE_CONFIG["font_family"],
-                        color=page_data["plot_title_color"]
+                        color=page_data["plot_title_color"],
                     ),
                     x=0.5,
                     xanchor="center",
