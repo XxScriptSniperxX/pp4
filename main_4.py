@@ -357,7 +357,7 @@ if "managedata" not in st.session_state:
     st.session_state["managedata"] = ManageData()
 
 # --- Button trigger ---
-if st.sidebar.button("🚀 Let's Roll", use_container_width=True):
+if st.sidebar.button("🚀 Let's Roll", width='stretch'):
     if not uploaded_files:
         st.toast("⚠️ Please upload at least one JSON file.", icon="❗")
     else:
@@ -432,7 +432,7 @@ if "tabs" in st.session_state and "impostors" in st.session_state:
                 if isinstance(fig, plt.Figure):
                     st.pyplot(fig)
                 else:
-                    st.plotly_chart(fig, use_container_width=True, key=f"chart_{maneuver_id}_{idx}")
+                    st.plotly_chart(fig, width='stretch', key=f"chart_{maneuver_id}_{idx}")
                 st.markdown("<br><br>", unsafe_allow_html=True)
     if "default_selected" not in st.session_state:
         default_mapping = {
