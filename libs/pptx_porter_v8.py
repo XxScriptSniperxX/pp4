@@ -232,19 +232,16 @@ def cv2_detect_legend_bbox(cv_img: np.ndarray, fallback_ratio: float = LEGEND_FA
     return legend_bbox, h, w
 
 
+import numpy as np
+import cv2
+
 def crop_and_separate(cv_img: np.ndarray, legend_bbox: tuple, 
                       left_padding: int = 30, right_padding: int = 30,
-                      top_padding: int = 20, bottom_padding: int = 20,is_plotly=False) -> tuple:
+                      top_padding: int = 20, bottom_padding: int = 20,
+                      is_plotly: bool = False) -> tuple:
     """
-    Crop image into plot and legend with PADDING to show borders.
-    
-    LEGEND CROPPING: Increased padding to prevent legend cutoff
-    Adjust these values if legend is still being cropped:
-    - left_padding: Add space to left of legend (shows left border)
-    - right_padding: Add space to right of legend (shows right border)  
-    - top_padding: Add space above legend (shows top border)
-    - bottom_padding: Add space below legend (shows bottom border)
-    
+    Crop image into plot and legend with padding to show borders.
+
     Args:
         cv_img: OpenCV image (BGR)
         legend_bbox: (x, y, w, h) from cv2.boundingRect
@@ -252,32 +249,31 @@ def crop_and_separate(cv_img: np.ndarray, legend_bbox: tuple,
         right_padding: Pixels to add on right (show right border)
         top_padding: Pixels to add on top (show top border)
         bottom_padding: Pixels to add on bottom (show bottom border)
-    
+        is_plotly: If True, skip padding (Plotly exports usually already sized)
+
     Returns:
         (plot_bgr, legend_bgr) as OpenCV images
     """
-    if is_plotly:
-        left_padding = 0
-        right_padding = 0
-        top_padding = 0
-        bottom_padding = 0
     h, w = cv_img.shape[:2]
     x, y, cw, ch = legend_bbox
-    
-    # Add padding to show legend borders AND prevent cutoff
-    x_start = max(0, x - left_padding)
-    x_end = min(w, x + cw + right_padding)
-    y_start = max(0, y - top_padding)
-    y_end = min(h, y + ch + bottom_padding)
-    
-    # Plot: everything left of legend (with padding)
-    plot_bgr = cv_img[:, :x_start]
-    
-    # Legend: bounding box WITH padding to show borders
-    legend_bgr = cv_img[y_start:y_end, x_start:x_end]
-    
-    return plot_bgr, legend_bgr
 
+    # Disable padding for Plotly if requested
+    if is_plotly:
+        left_padding = right_padding = top_padding = bottom_padding = 0
+
+    # Apply padding safely (clamped to image bounds)
+    x_start = max(0, x - left_padding)
+    x_end   = min(w, x + cw + right_padding)
+    y_start = max(0, y - top_padding)
+    y_end   = min(h, y + ch + bottom_padding)
+
+    # Plot region: everything left of the legend
+    plot_bgr = cv_img[:, :x_start]
+
+    # Legend region: bounding box + padding
+    legend_bgr = cv_img[y_start:y_end, x_start:x_end]
+
+    return plot_bgr, legend_bgr
 
 def cv2_to_pil(cv_img: np.ndarray) -> Image.Image:
     """Convert OpenCV BGR image to PIL Image (RGB)."""
