@@ -6,7 +6,7 @@ Created on Tue Mar 17 10:13:51 2026
 @author: Albin
 
 PPTX PORTER V5 - Production Ready
-- HIGH QUALITY: Matplotlib DPI=300, Plotly rendered at final size
+- HIGH QUALITY: Matplotlib DPI=300, Plotly scale=2
 - cv2 LEGEND DETECTION: Smart contour detection with padding
 - FLEXIBLE RESIZING: Separate sizes for 1D/2D plots
 - STREAMLIT CLOUD: No file dependencies, BytesIO throughout
@@ -57,19 +57,19 @@ def get_template_path() -> str:
 # Plot sizing
 PLOT_SIZE_1D = (854, 586)           # 1D Matplotlib plots
 PLOT_SIZE_2D = (950, 700)           # 2D Plotly plots (larger to avoid squeezing)
-LEGEND_SIZE = (348, 380)            # Legend box (increased height to prevent squeezing)
+LEGEND_SIZE = (348, 344)
 
-# Legend cropping padding (adjust to show/hide borders and prevent cutoff)
+# Legend cropping padding (adjust to show/hide borders)
 LEGEND_PADDING = {
-    'left': 30,                      # Show left border, prevent cutoff
-    'right': 30,                     # Show right border, prevent cutoff
-    'top': 20,                       # Show top border, prevent cutoff
-    'bottom': 20                     # Show bottom border, prevent cutoff
+    'left': 15,                      # Show left border
+    'right': 15,                     # Show right border
+    'top': 15,                       # Show top border
+    'bottom': 15                     # Show bottom border
 }
 
 # Quality settings
 MATPLOTLIB_DPI = 300                # HIGH QUALITY
-PLOTLY_SCALE = 1                    # Render at final size (no scaling to preserve text)
+PLOTLY_SCALE = 2                    # HIGH QUALITY
 LEGEND_FALLBACK_RATIO = 0.75
 
 # Tables
@@ -137,37 +137,25 @@ def clean_vehicle_names(vehicle_names: list[str]) -> dict[str, str]:
 def figure_to_bytes(fig, is_plotly: bool = False) -> bytes:
     """
     Convert figure to bytes (HIGH QUALITY).
-    Matplotlib: dpi=300 (safe to scale down later)
-    Plotly: scale=1, render at final size (preserves text)
+    Matplotlib: dpi=300
+    Plotly: scale=2
     
     Returns bytes that can be processed by cv2.
     """
     try:
         if is_plotly:
             try:
-                # Plotly: Render at FINAL SIZE directly
-                # scale=1 means no scaling - renders text at correct size
-                image_bytes = fig.to_image(
-                    format='png', 
-                    width=950,      # Final plot size width
-                    height=700,     # Final plot size height
-                    scale=1         # NO SCALING - render at final size
-                )
+                # Plotly HIGH QUALITY
+                image_bytes = fig.to_image(format='png', width=1600, height=1200, scale=PLOTLY_SCALE)
                 return image_bytes
             except Exception:
                 # Fallback
                 buf = io.BytesIO()
-                fig.write_image(
-                    buf, 
-                    format='png', 
-                    width=950,      # Final size
-                    height=700,     # Final size
-                    scale=1         # No scaling
-                )
+                fig.write_image(buf, format='png', width=1600, height=1200, scale=PLOTLY_SCALE)
                 buf.seek(0)
                 return buf.getvalue()
         else:
-            # Matplotlib: Safe to render at high DPI then scale down
+            # Matplotlib HIGH QUALITY
             buf = io.BytesIO()
             fig.savefig(buf, dpi=MATPLOTLIB_DPI, format='png', bbox_inches='tight', 
                        facecolor='white', edgecolor='none')
@@ -245,13 +233,12 @@ def cv2_detect_legend_bbox(cv_img: np.ndarray, fallback_ratio: float = LEGEND_FA
 
 
 def crop_and_separate(cv_img: np.ndarray, legend_bbox: tuple, 
-                      left_padding: int = 30, right_padding: int = 30,
-                      top_padding: int = 20, bottom_padding: int = 20) -> tuple:
+                      left_padding: int = 15, right_padding: int = 15,
+                      top_padding: int = 15, bottom_padding: int = 15) -> tuple:
     """
     Crop image into plot and legend with PADDING to show borders.
     
-    LEGEND CROPPING: Increased padding to prevent legend cutoff
-    Adjust these values if legend is still being cropped:
+    ADJUST PADDING TO CONTROL LEGEND BORDER VISIBILITY:
     - left_padding: Add space to left of legend (shows left border)
     - right_padding: Add space to right of legend (shows right border)  
     - top_padding: Add space above legend (shows top border)
@@ -271,7 +258,7 @@ def crop_and_separate(cv_img: np.ndarray, legend_bbox: tuple,
     h, w = cv_img.shape[:2]
     x, y, cw, ch = legend_bbox
     
-    # Add padding to show legend borders AND prevent cutoff
+    # Add padding to show legend borders
     x_start = max(0, x - left_padding)
     x_end = min(w, x + cw + right_padding)
     y_start = max(0, y - top_padding)
@@ -303,37 +290,24 @@ def pil_to_cv2(pil_img: Image.Image) -> np.ndarray:
 # ============================================================================
 
 def respect(image: Image.Image, target_size: tuple = PLOT_SIZE_1D, 
-            bg_color: tuple = (255, 255, 255), is_plotly: bool = False) -> Image.Image:
+            bg_color: tuple = (255, 255, 255)) -> Image.Image:
     """
     Resize with aspect ratio maintained (HIGH QUALITY LANCZOS).
     
-    For Plotly: Skip rescaling if already at target size (preserves text)
-    For Matplotlib: Safe to rescale
-    
     ADJUST target_size:
     - For 1D plots: use PLOT_SIZE_1D = (854, 586)
-    - For 2D plots: use PLOT_SIZE_2D = (950, 700)
+    - For 2D plots: use PLOT_SIZE_2D = (950, 700) to avoid squeezing
     
     Args:
         image: PIL Image
         target_size: (width, height)
         bg_color: RGB tuple for padding
-        is_plotly: If True, skip rescaling (text already at correct size)
     
     Returns:
         PIL Image at target_size with aspect ratio preserved
     """
     target_w, target_h = target_size
     w, h = image.size
-    
-    # For Plotly: If already near target size, don't rescale (preserves text)
-    if is_plotly:
-        # Allow 10% tolerance
-        if (abs(w - target_w) < target_w * 0.1 and 
-            abs(h - target_h) < target_h * 0.1):
-            # Already at target size, just pad if needed
-            if w == target_w and h == target_h:
-                return image
     
     # Calculate scale to fit BOTH dimensions without stretching
     scale = min(target_w / w, target_h / h)
@@ -355,9 +329,6 @@ def resend(image: Image.Image, target_width_px: int = LEGEND_SIZE[0],
     """
     Resize legend image to fit target box with aspect ratio maintained.
     
-    LEGEND RESIZE FIX: Changed to ensure legend fills space without squeezing.
-    Uses padding instead of cutting off content.
-    
     Args:
         image: PIL Image
         target_width_px: Target width
@@ -368,16 +339,11 @@ def resend(image: Image.Image, target_width_px: int = LEGEND_SIZE[0],
         PIL Image at target size with aspect ratio preserved
     """
     w, h = image.size
-    
-    # Calculate scale to fit within BOTH dimensions
     scale = min(target_width_px / w, target_height_px / h)
     new_w = int(w * scale)
     new_h = int(h * scale)
 
-    # Resize with HIGH QUALITY LANCZOS
     resized = image.resize((new_w, new_h), Image.LANCZOS)
-    
-    # Create canvas and paste centered (no cutting)
     canvas = Image.new("RGB", (target_width_px, target_height_px), bg_color)
     offset_x = (target_width_px - new_w) // 2
     offset_y = (target_height_px - new_h) // 2
@@ -532,7 +498,7 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
     Create maneuver slides with cv2 legend detection pipeline.
     
     Pipeline:
-    1. figure -> bytes (HIGH QUALITY: dpi=300, scale=1 for Plotly)
+    1. figure -> bytes (HIGH QUALITY: dpi=300, scale=2)
     2. bytes -> cv2 (BGR numpy array)
     3. cv2_detect_legend_bbox (cv2 contour detection)
     4. crop_and_separate (split into plot + legend WITH PADDING)
@@ -589,11 +555,11 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             # STEP 7: HIGH QUALITY RESIZE (LANCZOS + aspect ratio)
             # Different sizes for 1D vs 2D to avoid squeezing
             if is_plotly:
-                # 2D Plotly plots - skip rescaling to preserve text size
-                plot_resized = respect(plot_pil, PLOT_SIZE_2D, is_plotly=True)
+                # 2D Plotly plots - larger size
+                plot_resized = respect(plot_pil, PLOT_SIZE_2D)
             else:
-                # 1D Matplotlib plots - safe to rescale
-                plot_resized = respect(plot_pil, PLOT_SIZE_1D, is_plotly=False)
+                # 1D Matplotlib plots - original size
+                plot_resized = respect(plot_pil, PLOT_SIZE_1D)
             
             legend_resized = resend(legend_pil, *LEGEND_SIZE)
             
