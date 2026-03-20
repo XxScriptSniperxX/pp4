@@ -233,12 +233,13 @@ def cv2_detect_legend_bbox(cv_img: np.ndarray, fallback_ratio: float = LEGEND_FA
 
 
 def crop_and_separate(cv_img: np.ndarray, legend_bbox: tuple, 
-                      left_padding: int = 15, right_padding: int = 15,
-                      top_padding: int = 15, bottom_padding: int = 15) -> tuple:
+                      left_padding: int = 30, right_padding: int = 30,
+                      top_padding: int = 20, bottom_padding: int = 20,is_plotly=False) -> tuple:
     """
     Crop image into plot and legend with PADDING to show borders.
     
-    ADJUST PADDING TO CONTROL LEGEND BORDER VISIBILITY:
+    LEGEND CROPPING: Increased padding to prevent legend cutoff
+    Adjust these values if legend is still being cropped:
     - left_padding: Add space to left of legend (shows left border)
     - right_padding: Add space to right of legend (shows right border)  
     - top_padding: Add space above legend (shows top border)
@@ -255,10 +256,15 @@ def crop_and_separate(cv_img: np.ndarray, legend_bbox: tuple,
     Returns:
         (plot_bgr, legend_bgr) as OpenCV images
     """
+    if is_plotly:
+        left_padding = 0
+        right_padding = 0
+        top_padding = 0
+        bottom_padding = 0
     h, w = cv_img.shape[:2]
     x, y, cw, ch = legend_bbox
     
-    # Add padding to show legend borders
+    # Add padding to show legend borders AND prevent cutoff
     x_start = max(0, x - left_padding)
     x_end = min(w, x + cw + right_padding)
     y_start = max(0, y - top_padding)
@@ -549,7 +555,7 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
                 left_padding=LEGEND_PADDING['left'],
                 right_padding=LEGEND_PADDING['right'],
                 top_padding=LEGEND_PADDING['top'],
-                bottom_padding=LEGEND_PADDING['bottom']
+                bottom_padding=LEGEND_PADDING['bottom'],is_plotly
             )
             
             # STEP 6: CONVERT cv2 -> PIL
