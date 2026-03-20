@@ -1,0 +1,230 @@
+{
+  "Page_0": {
+    "title": "Cornering throttle off STD maneuver: All Parameters at 96% Peak Lateral acceleration ",
+    "subgraphs": [
+      {
+        "subgraph_title": "Yaw rate overshoot (Deg/s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__yaw_rate_overshoot_96"]
+      },
+	  {
+        "subgraph_title": "Turn radius ratio",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__turn_radius_ratio_96"]
+      },
+	  {
+        "subgraph_title": "Tacking coefficient at max yaw rate",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__tacking_coef_at_max_yaw_rate_96"]
+      },
+	  {
+        "subgraph_title": "Tacking coefficient at 1s after throttle off",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__tacking_coef_at_tl_p_96"]
+      },
+	 {
+        "subgraph_title": "Max rear slip angle (Deg)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__max_slip_angle_96"]
+      },
+	  {
+        "subgraph_title": "Slip angle rating",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__slip_angle_rating_96"]
+      },
+	  {
+        "subgraph_title": "Deceleration after 1 s of throttle off (m/s^2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__decel_after_1s_96"]
+      },
+      {
+        "subgraph_title": "Time to max yaw rate from throttle off (s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cornering_throttle_off_STD_finish__time_yaw_max_96"]
+      }
+    ]
+  },
+  
+  
+  "Page_1": {
+    "title": "Cornering throttle off STD maneuver: Yaw rate overshoot (Deg/s) ",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw rate overshoot (Deg/s)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__yaw_rate_overshoot",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  
+  "Page_2": {
+    "title": "Cornering throttle off STD maneuver: Turn radius ratio ",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Turn radius ratio",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__turn_radius_ratio",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  
+  
+  "Page_3": {
+    "title": "Cornering throttle off STD maneuver: Tacking coefficient at max yaw rate",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Tacking coefficient at max yaw rate",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__tacking_coef_at_max_yaw_rate",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+     
+  
+  "Page_4": {
+    "title": "Cornering throttle off STD maneuver: Tacking coefficient at 1s after throttle off",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Tacking coefficient at 1s after throttle off",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__tacking_coef_at_tl_p",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    
+  
+  "Page_5": {
+    "title": "Cornering throttle off STD maneuver: Max rear slip angle (Deg)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Max rear slip angle (Deg)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__max_slip_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  
+  
+  "Page_6": {
+    "title": "Cornering throttle off STD maneuver: Slip angle rating",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Slip angle rating",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__slip_angle_rating",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    
+  
+  "Page_7": {
+    "title": "Cornering throttle off STD maneuver: Deceleration after 1 s of throttle off (m/s^2)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Deceleration after 1 s of throttle off (m/s^2)",
+        "xAxisTitle": "X-direction (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__decel_after_1s",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_8": {
+    "title": "Cornering throttle off STD maneuver: Time to max yaw rate after throttle off (s)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Time to max yaw rate after throttle off (s)",
+        "xAxisTitle": "X-direction (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cornering_throttle_off_STD_finish__time_yaw_max",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }
+  
+ 
+}

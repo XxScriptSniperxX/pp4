@@ -1,0 +1,226 @@
+{
+  "Page_0": {
+    "title": "ISO 7401 Step Steer criteria @acc_y = 4 m/s2 , vel_longi = 80 km/h (1/2)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Maximal center of gravity sideslip angle (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Step_Steer_v2__max_slip_g"]
+      },
+      {
+        "subgraph_title": "Maximal front axle sideslip angle (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__max_slip_f_tires"]
+      },
+      {
+        "subgraph_title": "Maximal rear axle sideslip angle (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__max_slip_r_tires"]
+      },
+      {
+        "subgraph_title": "Steady State yaw velocity response gain [1/s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__yaw_gain"]
+      },
+	  {
+        "subgraph_title": "TB [deg-s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__tb_factor"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "ISO 7401 Step Steer criteria @acc_y = 4 m/s2 , vel_longi = 80 km/h (2/2)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Response time for lateral acceleration T_acc_y [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__response_acc"]
+      },
+      {
+        "subgraph_title": "Peak response time for lateral acceleration T_max_acc_y [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__peak_response_lat_acc"]
+      },
+      {
+        "subgraph_title": "Response time for yaw speed T_yaw [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__response_yaw"]
+      },
+      {
+        "subgraph_title": "Peak response time for yaw speed T_max_yaw [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__peak_response_yaw"]
+      },
+      {
+        "subgraph_title": "Overshoot value of lateral acceleration U_acc_y [%]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__acc_overshoot"]
+      },
+      {
+        "subgraph_title": "Overshoot value of yaw velocity U_lacet [%]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Step_Steer_v2__yaw_overshoot"]
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Steering graph",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering input (°)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Step_Steer_v2__st_w_ang",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_3": {
+    "title": "Lateral acceleration",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Lateral Acceleration (m/s 2)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Step_Steer_v2__lat_acc",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "Yaw rate",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw rate (°/s)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Step_Steer_v2__yaw_rate",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_5": {
+    "title": "Slip at the center of gravity",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Slip at the center of gravity (deg)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Step_Steer_v2__slip_ang_at_g",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_6": {
+    "title": "Front axle slip",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Front axle slip (deg)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Step_Steer_v2__slip_ang_f_tires",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_7": {
+    "title": "Rear axle slip",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Rear axle slip (deg)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Step_Steer_v2__slip_ang_r_tires",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_8": {
+    "title": "Trajectory",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Y-direction (m)",
+        "xAxisTitle": "X-direction (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Step_Steer_v2__trajectory",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }
+}

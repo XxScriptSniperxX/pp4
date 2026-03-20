@@ -1,0 +1,109 @@
+{
+  "Page_0": {
+    "title": "DA100 Steering addition maneuver",
+    "subgraphs": [
+      {
+        "subgraph_title": "Stabilised lateral acceleration (m/s2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__accy_stab"]
+      },
+	  {
+        "subgraph_title": "Maximum lateral acceleration (m/s2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__max_accy"]
+      },
+	  {
+        "subgraph_title": "Minimum lateral acceleration after steering ramp (m/s2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__min_accy_undershoot"]
+      },
+	  {
+        "subgraph_title": "Stabilised rear axle slip (deg)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__rear_slip_stab"]
+      },
+	 {
+        "subgraph_title": "Maximum Rear axle slip (deg)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__rear_slip_max"]
+      },
+	  {
+        "subgraph_title": "Lateral acceleration overshoot (m/s2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__accy_overshoot"]
+      },
+	  {
+        "subgraph_title": "Lateral acceleration undershoot (m/s2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__accy_undershoot"]
+      },
+	  {
+        "subgraph_title": "Rear axle slip overshoot (deg)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_100_Steering_Addition__rear_slip_overshoot"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Lateral acceleration variation (m/s2)",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Lateral acceleration (m/s2)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_100_Steering_Addition__accy",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]    
+  },
+  "Page_2": {
+    "title": "Rear axle slip variation (deg)",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Rear axle sideslip (deg)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_100_Steering_Addition__Rear_slip",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]    
+  }
+
+  
+}

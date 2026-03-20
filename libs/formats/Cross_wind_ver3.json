@@ -1,0 +1,139 @@
+{
+  "Page_0": {
+    "title": "Criteria for the synthesis of behavior under cross wind (20 ° to 120 km/h)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Yaw rate peak (°/s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Cross_Wind__max_yaw_rate"]
+      },
+      {
+        "subgraph_title": "Yaw acceleration peak (°/s 2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Cross_Wind__max_yaw_acc"]
+      },
+      {
+        "subgraph_title": "Objectivation criterion (-)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Cross_Wind__objectivation_criteria"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Yaw rate",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw rate (deg/s)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cross_Wind__yaw_rate",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Yaw acceleration",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw acceleration (deg/s²)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cross_Wind__yaw_acc",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_3": {
+    "title": "Trajectory",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Y-direction (m)",
+        "xAxisTitle": "x-direction (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cross_Wind__trajectory",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "Aerodynamic effort",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Lateral aerodynamic effort (N)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cross_Wind__aero_effort",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_5": {
+    "title": "Aerodynamic Torque",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Aerodynamic torque around the vertical axis (N m)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cross_Wind__aero_torque",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_6": {
+    "title": "Criteria of synthesis represented in a plan",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw acceleration peak (°/s2)",
+        "xAxisTitle": "Yaw rate peak (°/s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Cross_Wind__max_yaw_rate_v_max_yaw_acc",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }
+}

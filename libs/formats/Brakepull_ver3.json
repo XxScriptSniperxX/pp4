@@ -1,0 +1,163 @@
+{
+  "Page_0": {
+    "title": "Criteria for brake pulling (130 km/h ; 7 m/s2)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Lateral deviation (m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Brake_Pull__deviation_0_km_h__130"]
+      },
+      {
+        "subgraph_title": "Peak yawrate (°/s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Brake_Pull__yaw_vel_peak__130"]
+      },
+      {
+        "subgraph_title": "Peak yaw acceleration (°/s 2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Brake_Pull__yaw_acc_peak_130"]
+      },
+      {
+        "subgraph_title": "Average stabilized deceleration (m/s 2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Brake_Pull__avg_stab_decel_130"]
+      },
+      {
+        "subgraph_title": "Brake distribution (%/av.)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Brake_Pull__avg_stab_brake_dist_130"]
+      },
+      {
+        "subgraph_title": "Stabilized load distribution (%/av.)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Brake_Pull__avg_stab_load_dist_130"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Deceleration",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Absolute value of the longitudinal acceleration (m/s 2)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Brake_Pull__deceleration",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Deviation on Y",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Deviation value on the order (m)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Brake_Pull__deviation_130",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4]}
+      }
+    ]
+  },
+  "Page_3": {
+    "title": "Yaw rate",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw rate (°/s)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Brake_Pull__yaw_rate_130",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4]}
+      } 
+	]
+  },
+  "Page_4": {
+    "title": "Yaw acceleration",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw acceleration (°/s 2)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Brake_Pull__yaw_acc_130",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4]}
+      } 
+	]
+  },
+  "Page_5": {
+    "title": "Trajectory",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Y-direction (m)",
+        "xAxisTitle": "X-direction (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Brake_Pull__trajectory_130",
+                "x_value": 0,
+                "y_values_list": [0]}
+      } 
+	]
+  },
+  "Page_6": {
+    "title": "Load distribution",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Longitudinal load distribution (%/av.)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Brake_Pull__load_dist_130",
+                "x_value": 0,
+                "y_values_list": [0]}
+      } 
+	]
+  }
+}

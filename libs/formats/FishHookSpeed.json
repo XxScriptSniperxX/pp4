@@ -1,0 +1,199 @@
+{
+  "Page_0": {
+    "title": "Fish hook synthesis criteria)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Load transfer l-r max. | 1st turn (%)  ",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 100,
+        "xAxis_scale_minor_tick_step": 10,
+        "criteria_id_list": ["FishHookSpeed_CompleteManeuver__load_transfer_1st"]
+      },
+      {
+        "subgraph_title": "Load transfer r-l max. | 2nd turn (%)  ",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 10,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["FishHookSpeed_CompleteManeuver__load_transfer_2nd"]
+      },
+      {
+        "subgraph_title": "Max. duration of 2 wheels lift (s)  ",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["FishHookSpeed_CompleteManeuver__max_duration"]
+      },
+      {
+        "subgraph_title": "Duration of maintaining the 1st turn (s)  ",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["FishHookSpeed_CompleteManeuver__first_duration"]
+      },
+      {
+        "subgraph_title": "Tire slip Fr max. in abs. value (°)  ",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["FishHookSpeed_CompleteManeuver__slip_angle_f_tires_max"]
+      },
+      {
+        "subgraph_title": "Tire slip Rr max. in abs. value (°)  ",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["FishHookSpeed_CompleteManeuver__slip_angle_r_tires_max"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Steering graph",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering input (°)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__steering_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Front axle slip",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Front axle slip (°)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__slip_angle_f_tires",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_3": {
+    "title": "Rear axle slip",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Rear axle slip (°)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__slip_angle_r_tires",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "Lateral Load Distribution",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Load transfer right to left (%; 100% = lifting wheels d.)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__load_transfer",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_5": {
+    "title": "Roll",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Roll (°)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__roll_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_6": {
+    "title": "Trajectory",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Y Direction (m)",
+        "xAxisTitle": "X Direction (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__trajectory",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_7": {
+    "title": "Lateral acceleration",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Lateral Acceleration (m/s2)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__lateral_acc",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_8": {
+    "title": "Yaw rate",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw rate (°/s)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "FishHookSpeed_CompleteManeuver__yaw_rate",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }
+}

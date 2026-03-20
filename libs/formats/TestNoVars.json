@@ -1,0 +1,76 @@
+{
+  "Page_0": {
+    "title": "Critères statico-dynamiques de synthèse DA géné",
+    "subgraphs": [
+      {
+        "subgraph_title": "Driver UDSTR (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_gene_standard_sine__understeering_gradient_at_steering_wheel"]
+      },
+      {
+        "subgraph_title": "Gain max en lacet (deg²/s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_gene_standard_sine__yaw_gain"]
+      },
+      {
+        "subgraph_title": "Vitesse caractéristique (km/h)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_gene_standard_sine__characteristic_speed"]
+      },
+      {
+        "subgraph_title": "Roulis spécifique (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.2,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_gene_standard_sine__specific_roll"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Gradient de sous virage en fonction du gain d'assistance",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Gradient de sous virage",
+        "xAxisTitle": "Gain d'assistance",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": false,
+		"spline_criteria": {
+		  "id": "DA_gene_standard_sine__understeering_gradient_vs_assistance_gain",
+		  "x_value": 0,
+		  "y_values_list": [0]
+		}
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Vitesse de Lacet simulée, recalculée à partir de la formule angle_roue*vitesse_longi/(empattement+DA*vitesse_longi**2) et identifiée par le fit interne [deg/s] en fonction du temps (s)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Vitesse de lacet (deg/s)",
+        "xAxisTitle": "Temps (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": false,
+		"spline_criteria": {
+		  "id": "DA_gene_standard_sine__yaw_rates",
+		  "x_value": 0,
+		"y_values_list": [0, 1, 2]}
+      }
+    ]
+  }
+}

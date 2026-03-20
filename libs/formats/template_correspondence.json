@@ -1,0 +1,22 @@
+{
+	"Brakepull_ver3": "Brakepull_ver3",
+	"Check_FMU_CRBS": "Check_CRBS",
+	"Check_TDS_VDC_ABS": "Check_TCS_VDC_ABS",
+	"Crosswind_ver3": "Cross_wind_ver3",
+	"DA_Gene_v2": "DA_Gene_v2",
+	"DA80_DAGene": "Da_Gene_v3",
+	"DA_100_step_steer_SET_1": "Extended_Step_Steer_SET",
+	"DA_100_step_steer_STD_1": "Extended_Step_Steer_STD",
+	"DA_100_throttle_off_SET_1": "Cornering_Throttle_off_SET",
+	"DA_100_throttle_off_STD_1": "Cornering_Throttle_off_STD",
+	"Throttle_off_STD_v2a": "Cornering_Throttle_off_STD",
+	"Throttle_off_SET_v2a": "Cornering_Throttle_off_SET",
+	"DA100_Steering_addition": "DA100_Steering_addition",
+	"DA50_ver3": "DA_50_ver3",
+	"DA50_MPC": "DA_50_MPC",
+	"DA80_Kph_LH": "DA_80kph_new",
+	"FishHookSpeed": "FishHookSpeed",
+	"ISO7401_v2": "ISO_7401",
+	"TBUP_v6": "TBUP_WIP ?",
+	"YASRMultiplicator": "YASRMultiplicator"
+}

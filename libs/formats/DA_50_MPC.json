@@ -1,0 +1,395 @@
+{
+  "Page_0": {
+    "title": "Steady-state criteria of simulation (radius 50 m)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Understeer gradient chord 0–3 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_50_MPC__chord_understeer_grad_3"]
+      },
+      {
+        "subgraph_title": "Understeer gradient at 5 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_understeer_grad_5"]
+      },
+      {
+        "subgraph_title": "Specific Roll chord 0–3 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__chord_spe_roll_3"]
+      },
+      {
+        "subgraph_title": "Specific Roll at 5 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_spe_roll_5"]
+      },
+      {
+        "subgraph_title": "Rear specific slip chord 0–3 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__chord_spe_slip_angle_3"]
+      },
+      {
+        "subgraph_title": "Rear specific slip at 5 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_spe_slip_angle_5"]
+      },
+      {
+        "subgraph_title": "Load transfer distribution at 5 m/s^2 (%)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__load_transfer_distr_5"]
+      },
+      {
+        "subgraph_title": "Steering Wheel Torque at 3 m/s^2 (N m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__st_w_torque_3"]
+      }
+    ]
+  },
+  
+  "Page_1": {
+    "title": "Single Track model",
+    "subgraphs": [
+      {
+        "subgraph_title": "Front axle mass (Kg)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_50_MPC__front_mass"]
+      },
+      {
+        "subgraph_title": "Rear axle mass (Kg)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__rear_mass"]
+      },
+      {
+        "subgraph_title": "KyF - Front axle cornering stiffness (N/rad)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__front_ky"]
+      },
+      {
+        "subgraph_title": "KyR - Rear axle cornering stiffness (N/rad)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__rear_ky"]
+      },
+      {
+        "subgraph_title": "Izz - Yaw inertia (kg/m²)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__izz_inertia"]
+      },
+      {
+        "subgraph_title": "l - wheelbase (m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__wheelbase"]
+      },
+      {
+        "subgraph_title": "n - steering demultiplication (-)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__demul"]
+      }
+    ]
+  },
+  
+  "Page_2": {
+    "title": "Steady-state additionnal criteria of simulation (radius 50 m)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Understeer gradient @ 3 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_50_MPC__inst_understeer_grad_3"]
+      },
+      {
+        "subgraph_title": "Understeer gradient @ 7 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_understeer_grad_7"]
+      },
+      {
+        "subgraph_title": "Instantaneous specific rear slip angle @ 3 m/s^2 (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_spe_slip_angle_3"]
+      },
+      {
+        "subgraph_title": "Instantaneous specific rear slip angle @ 7 m/s^2 (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_spe_slip_angle_7"]
+      },
+      {
+        "subgraph_title": "Specific roll angle @ 3 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_spe_roll_3"]
+      },
+      {
+        "subgraph_title": "Specific roll angle @ 7 m/s^2 (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__inst_spe_roll_7"]
+      },
+      {
+        "subgraph_title": "Max lateral acceleration (m/s^2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_50_MPC__max_gt"]
+      }
+    ]
+  },
+
+
+  "Page_3": {
+    "title": "Contributions des sous système, à la D.A. corde 0−3 m/s² au volant (rayon 50 m)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "barChartGraph",
+        "criteria_id_list": [
+          "DA_50_MPC__chord_underst_grad_at_cine_f_sw_3", "DA_50_MPC__chord_underst_grad_at_cine_r_sw_3",
+          "DA_50_MPC__chord_underst_grad_at_elas_f_sw_3", "DA_50_MPC__chord_underst_grad_at_elas_r_sw_3",
+          "DA_50_MPC__chord_underst_grad_at_slip_f_sw_3", "DA_50_MPC__chord_underst_grad_at_slip_r_sw_3",
+          "DA_50_MPC__chord_underst_grad_at_tor_col_sw_3", "DA_50_MPC__error"
+        ],
+        "yAxisTitle": "Contributions en °volant/(m/s²)−(%) (Convention: (+)SOUS−VIREUR)",
+        "isGraphStacked": true,
+        "isGraphNormalized": true
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "Lateral acceleration vs Steering angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_strg_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_5": {
+    "title": "Lateral acceleration vs Rear slip angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Rear slip angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_rear_slip_ang",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_6": {
+    "title": "Lateral acceleration vs Roll angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Roll angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_roll_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_7": {
+    "title": "Lateral acceleration vs Load transfer distribution to front axle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Distribution to Front (%)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_load_dist",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_8": {
+    "title": "Lateral acceleration vs Ackermann additional steering angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Ackermann additional steering angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_add_str_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    "Page_9": {
+    "title": "Roulis spécifique instantané",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Roulis Spe °/(m/s²)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_spe_roll_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    "Page_10": {
+    "title": "Dynamique angulaire instantanée",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Dérivée angle volant °/(m/s²)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_spe_strg_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    "Page_11": {
+    "title": "Dérive Spécifique AR instantanée",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Dérive Spécifique AR °/(m/s²)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_spe_r_slip_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    "Page_12": {
+    "title": "Couple Crémaillère",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Couple Crémaillère (Nm)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_pin_torq",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    "Page_13": {
+    "title": "Couple Volant",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Couple Volant (Nm)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_50_MPC__lateral_acc_v_str_w_torq",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }
+}

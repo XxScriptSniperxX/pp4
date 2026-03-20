@@ -1,0 +1,155 @@
+{
+  "Page_0": {
+    "title": "Extended step steer STD maneuver: All criterias at 8 m/s^2 Peak Lateral acceleration ",
+    "subgraphs": [
+      {
+        "subgraph_title": "Response time in yaw velocity [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Extended_step_steer_SET__response_time_yaw_vel_8_0"]
+      },
+	  {
+        "subgraph_title": "Surge in yaw velocity [°/s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Extended_step_steer_SET__surge_yaw_vel_8_0"]
+      },
+	  {
+        "subgraph_title": "Downturn duration in yaw velocity [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Extended_step_steer_SET__t_sub_yaw_vel_8_0"]
+      },
+	  {
+        "subgraph_title": "Downturn duration in lateral acceleration [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Extended_step_steer_SET__t_sub_acc_y_8_0"]
+      },
+	 {
+        "subgraph_title": "Downturn/Surge duration in side slip velocity [s]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Extended_step_steer_SET__t_delta_vel_8_0"]
+      },
+	  {
+        "subgraph_title": "Stabilized lateral acceleration [m/s²]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Extended_step_steer_SET__stabilised_accy_8_0"]
+      }
+    ]
+  },
+  
+  
+  "Page_1": {
+    "title": "Extended step steer STD maneuver: Response time in yaw velocity [s]",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Duration for the yaw velocity peak (s)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Extended_step_steer_SET__response_time_yaw_vel",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  
+  "Page_2": {
+    "title": "Extended step steer STD maneuver: Surge in yaw velocity (°/s)  ",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Surge in yaw velocity (°/s)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Extended_step_steer_SET__surge_yaw_vel",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  
+  
+  "Page_3": {
+    "title": "Extended step steer STD maneuver: Downturn duration in yaw velocity (s) ",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Duration for the yaw velocity downturn (s)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Extended_step_steer_SET__t_sub_yaw_vel",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+     
+  
+  "Page_4": {
+    "title": "Extended step steer STD maneuver: Downturn duration in lateral acceleration (s)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Duration for the lateral acceleration downturn (s)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Extended_step_steer_SET__t_sub_acc_y",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+    
+  
+  "Page_5": {
+    "title": "Extended step steer STD maneuver: Downturn/Surge duration in side slip velocity (s) ",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Duration for the downturn/surge in side slip angle (s)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Extended_step_steer_SET__t_delta_vel",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }  
+ 
+}

@@ -1,0 +1,149 @@
+{
+  "Page_0": {
+    "title": "Critères de DA généralisée sur DA (rayon 50 m) part 1",
+    "subgraphs": [
+      {
+        "subgraph_title": "Dyn. ang. corde 0–3 m/s2 (° s2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA50__chord_spe_slip_angle_3"]
+      },
+      {
+        "subgraph_title": "Dyn. ang. instantanée à 5 m/s2 (° s2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA50__inst_understeer_grad_5"]
+      },
+      {
+        "subgraph_title": "Roulis spécifique inst. à 5 m/s2 (° s2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA50__inst_spe_roll_5"]
+      },
+      {
+        "subgraph_title": "Copie_1",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA50__inst_spe_roll_5"]
+      },
+      {
+        "subgraph_title": "Copie_2",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA50__inst_spe_roll_5"]
+      },
+      {
+        "subgraph_title": "Copie_3",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA50__inst_spe_roll_5"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Critères de DA généralisée sur DA (rayon 50 m) part 2",
+    "subgraphs": [
+      {
+        "subgraph_title": "Dyn. ang. corde 0–3 m/s2 (° s2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA50__chord_spe_slip_angle_3"]
+      },
+      {
+        "subgraph_title": "Dyn. ang. instantanée à 5 m/s2 (° s2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA50__inst_understeer_grad_5"]
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Contributions des sous système, à la D.A. corde 0−3 m/s² au volant (rayon 50 m)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "barChartGraph",
+        "criteria_id_list": ["DA50__chord_spe_slip_angle_3", "DA50__inst_understeer_grad_5", "DA50__inst_spe_roll_5"],
+        "yAxisTitle": "Contributions en °volant/(m/s²)−(%) (Convention: (+)SOUS−VIREUR)",
+        "isGraphStacked": true,
+        "isGraphNormalized": true
+      }
+    ]
+  },
+  "Page_3": {
+    "title": "Surbraquage",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Surbraquage (°)",
+        "xAxisTitle": "Accélération transversale (m/s2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "variables_id_list": ["Carbody_Eulerangle_1", "Carbody_thetarelavg"]
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "Plan vivacité chassis (Vch) − Maniabilité (L*dem)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Maniabilité [1/(L*dem)]",
+        "xAxisTitle": "Vch [m/s] - Vivacité chassis",
+        "criteria_id_for_curve": ["DA50__load_transfer_distr_5", "DA50__chord_underst_grad_at_wh_nd_3"],
+        "iso_curves": true,
+        "variables_id_list": []
+      }
+    ]
+  },
+    "Page_5": {
+    "title": "Surbraquage_Data_Export",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Surbraquage (°)",
+        "xAxisTitle": "Accélération transversale (m/s2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "variables_id_list": ["Carbody_Eulerangle_1", "Carbody_thetarelavg"],
+        "x_axis_log_scale": false,
+        "data_export_excel": true
+      }
+    ]
+  },
+  "Page_6": {
+    "title": "Surbraquage_Fake",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Faux titre yAxis",
+        "xAxisTitle": "Accélération transversale (m/s2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "variables_id_list": ["Carbody_Eulerangle_1", "Carbody_thetarelavg"],
+        "x_axis_log_scale": false,
+        "data_export_excel": true
+      }
+    ]
+  }
+}

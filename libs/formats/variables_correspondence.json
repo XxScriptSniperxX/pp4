@@ -1,0 +1,13 @@
+{
+	"Time":  ["Time", "Temps"],
+	"Steering angle":  ["Steering angle", "Angle volant"],
+	"Steering torque": ["Steering torque", "Steering Wheel torque", "Couple volant"],
+	"Vehicle speed": ["Vehicle speed", "Vitesse Longi"],
+	"Vehicle acceleration": ["Vehicle acceleration", "Accel Longi"],
+	"Lateral acceleration": ["Lateral acceleration", "Accel Laterale"],
+	"Yaw angle": ["Yaw angle", "Angle Lacet"],
+	"Yaw rate": ["Yaw rate", "Vitesse Lacet"],
+	"Roll angle": ["Roll angle", "Angle Roulis"],
+	"Roll rate": ["Roll rate", "Vitesse Roulis"],
+	"Slip angle(CoG)": ["Slip angle(CoG)", "Angle Glissement (CoG)"]
+}

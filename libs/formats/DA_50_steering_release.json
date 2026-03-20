@@ -1,0 +1,97 @@
+{
+  "Page_0": {
+    "title": "DA50 Steering release: Strg angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering angle (Deg)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA50_Steering_release__Steering_wheel_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+
+  "Page_1":  {
+    "title": "DA50 Steering release: Strg torque",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA50_Steering_release__Steering_wheel_torque",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  
+  "Page_2":  {
+    "title": "DA50 Steering release: Yaw angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Yaw angle (Degree)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA50_Steering_release__Yaw_angle",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+
+  "Page_3": {
+    "title": "DA50 Steering release: Lateral acceleration",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Lateral acceleration (m/s2)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA50_Steering_release__Lateral_acceleration",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "DA50 Steering release: Vehicle path",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": " Vehicle Y coordinates (m)",
+        "xAxisTitle": "Vehicle X coordinares (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA50_Steering_release__Vehicle_path",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }
+    
+  
+}

@@ -1,0 +1,110 @@
+{
+  "Page_0": {
+    "title": "Steering torque vs Steering angle at 50 km/h",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "sine_steering_2__Strg_torque_v_strg_angle_50",
+                "x_value": 0,
+                "y_values_list": [0,1,2]}
+      }
+    ]    
+  },
+  "Page_1": {
+    "title": "Steering torque vs Steering angle at 70 km/h",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "sine_steering_2__Strg_torque_v_strg_angle_70",
+                "x_value": 0,
+                "y_values_list": [0,1,2]}
+      }
+    ]    
+  },
+  "Page_2": {
+    "title": "Steering torque vs Steering angle at 90 km/h",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "sine_steering_2__Strg_torque_v_strg_angle_90",
+                "x_value": 0,
+                "y_values_list": [0,1,2]}
+      }
+    ]    
+  },
+  "Page_3": {
+    "title": "Steering torque vs Steering angle at 110 km/h",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "sine_steering_2__Strg_torque_v_strg_angle_110",
+                "x_value": 0,
+                "y_values_list": [0,1,2]}
+      }
+    ]    
+  },
+  "Page_4": {
+    "title": "Steering torque vs Steering angle at 130 km/h",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "sine_steering_2__Strg_torque_v_strg_angle_130",
+                "x_value": 0,
+                "y_values_list": [0,1,2]}
+      }
+    ]    
+  },
+  "Page_5": {
+    "title": "Steering torque vs Steering angle at for all speeds",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "sine_steering_2__Strg_torque_v_strg_angle_130",
+                "x_value": 0,
+                "y_values_list": [0,1,2]}
+      }
+    ]    
+  } 
+}

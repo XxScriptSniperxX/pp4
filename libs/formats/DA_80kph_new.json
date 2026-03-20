@@ -1,0 +1,331 @@
+{
+  "Page_0": {
+    "title": "Steady-state criteria of simulation (DA_80kph - Understeering)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Understeer - dead zone (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__dead_zone_understeer"]
+      },
+      {
+        "subgraph_title": "Understeer - linear (° s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__linear_slope_understeer"]
+      },
+      {
+        "subgraph_title": "Understeer gradient chord 0–3 m/s^2 (°.s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_understeer_grad_3"]
+      },
+      {
+        "subgraph_title": "Understeer gradient chord 3–7 m/s^2 (°.s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_understeer_grad_3_7"]
+      },
+      {
+        "subgraph_title": "Understeer gradient chord 0–7 m/s^2 (°.s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_understeer_grad_7"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Steady-state criteria of simulation (DA_80kph - Specific Roll)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Specific Roll - dead zone (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__dead_zone_spe_roll"]
+      },
+      {
+        "subgraph_title": "Specific Roll - linear (°.s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__linear_slope_spe_roll"]
+      },
+      {
+        "subgraph_title": "Specific Roll chord 0–3 m/s^2 (°.s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_spe_roll_3"]
+      },
+      {
+        "subgraph_title": "Specific Roll chord 3–7 m/s^2 (°.s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_spe_roll_3_7"]
+      },
+      {
+        "subgraph_title": "Specific Roll chord 0–7 m/s^2 (°.s^2/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_spe_roll_7"]
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Steady-state criteria of simulation (DA_80kph - Yaw Rate)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Yaw Rate - dead zone (°/s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__dead_zone_yawrate"]
+      },
+      {
+        "subgraph_title": "Yaw Rate - linear (° s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__linear_slope_yawrate"]
+      },
+      {
+        "subgraph_title": "Yaw Rate chord 0–3 m/s^2 (°.s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_yawrate_3"]
+      },
+      {
+        "subgraph_title": "Yaw Rate chord 3–7 m/s^2 (°.s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_yawrate_3_7"]
+      },
+      {
+        "subgraph_title": "Yaw Rate chord 0–7 m/s^2 (°.s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_yawrate_7"]
+      }
+    ]
+  },
+    "Page_3": {
+    "title": "Steady-state criteria of simulation (DA_80kph - Rear Specific Slip Angle)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Rear Specific Slip Angle - dead zone (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__dead_zone_spe_rear_slip"]
+      },
+      {
+        "subgraph_title": "Rear Specific Slip Angle - linear (° s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__linear_slope_spe_rear_slip"]
+      },
+      {
+        "subgraph_title": "Rear Specific Slip chord 0–3 m/s^2 (°.s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_spe_rear_slip_3"]
+      },
+      {
+        "subgraph_title": "Rear Specific Slip chord 3–7 m/s^2 (°.s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_spe_rear_slip_3_7"]
+      },
+      {
+        "subgraph_title": "Rear Specific Slip chord 0–7 m/s^2 (°.s/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.05,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_80kph_LH__chord_spe_rear_slip_7"]
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "Steady-state criteria of simulation (DA_80kph)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Steering Wheel Torque at 3 m/s^2 (N m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_80kph_LH__st_w_torque_3"]
+      },
+      {
+        "subgraph_title": "Steering Wheel Angle at 3 m/s^2 (°)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_80kph_LH__st_w_angle_3"]
+      },
+      {
+        "subgraph_title": "Max lateral acceleration (m/s^2)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_80kph_LH__max_lateral_acceleration"]
+      },
+      {
+        "subgraph_title": "Characteristic Speed (km/h)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_80kph_LH__characteristic_speed"]
+      },
+      {
+        "subgraph_title": "Yaw Gain",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_80kph_LH__yaw_gain"]
+      },
+      {
+        "subgraph_title": "Load Transfert (%)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.02,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_80kph_LH__load_transfert"]
+      }
+    ]
+  },
+  "Page_5": {
+    "title": "Lateral acceleration vs Steering angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_80kph_LH__swa_vs_gammat",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_6": {
+    "title": "Lateral acceleration vs Rear slip angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Rear slip angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_80kph_LH__rear_slip_vs_gammat",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_7": {
+    "title": "Lateral acceleration vs Roll angle",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Roll angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+          "id": "DA_80kph_LH__roll_vs_gammat",
+          "x_value": 0,
+          "y_values_list": [
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "Page_8": {
+    "title": "Lateral acceleration vs Understeer",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Understeer",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+          "id": "DA_80kph_LH__understeer_vs_gammat",
+          "x_value": 0,
+          "y_values_list": [
+            0
+          ]
+        }
+      }
+    ]
+  },
+    "Page_9": {
+    "title": "Lateral acceleration vs Steering Wheel Torque",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering Wheel Torque (Nm)",
+        "xAxisTitle": "Lateral acceleration (m/s²)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "DA_80kph_LH__swt_vs_gammat",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  }
+}

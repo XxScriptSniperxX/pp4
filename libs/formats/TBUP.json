@@ -1,0 +1,217 @@
+{
+  "Page_0": {
+    "title": "TBUP all Parameters Right steer",
+    "subgraphs": [
+      {
+        "subgraph_title": "Right steer: Steering angle for 5 m/s^2 lat acceleration at 30 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_R__delta_0_5_SIS_R_30"]
+      },
+	  {
+        "subgraph_title": "Right steer: Steering angle for 5 m/s^2 lat acceleration at 50 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_R__delta_0_5_SIS_R_50"]
+      },
+	  {
+        "subgraph_title": "Right steer: Steering angle for 5 m/s^2 lat acceleration at 70 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_R__delta_0_5_SIS_R_70"]
+      },
+	  {
+        "subgraph_title": "Right steer: Steering angle for 5 m/s^2 lat acceleration at 90 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_R__delta_0_5_SIS_R_90"]
+      },
+	 {
+        "subgraph_title": "Right steer: Steering angle for 5 m/s^2 lat acceleration at 110 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_R__delta_0_5_SIS_R_110"]
+      },
+	  {
+        "subgraph_title": "Right steer: Steering angle for 5 m/s^2 lat acceleration at 130 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_R__delta_0_5_SIS_R_130"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "TBUP all Parameters Left steer",
+    "subgraphs": [
+      {
+        "subgraph_title": "Left steer: Steering angle for 5 m/s^2 lat acceleration at 30 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_L__delta_0_5_SIS_L_30"]
+      },
+	  {
+        "subgraph_title": "Left steer: Steering angle for 5 m/s^2 lat acceleration at 50 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_L__delta_0_5_SIS_L_50"]
+      },
+	  {
+        "subgraph_title": "Left steer: Steering angle for 5 m/s^2 lat acceleration at 70 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_L__delta_0_5_SIS_L_70"]
+      },
+	  {
+        "subgraph_title": "Left steer: Steering angle for 5 m/s^2 lat acceleration at 90 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_L__delta_0_5_SIS_L_90"]
+      },
+	 {
+        "subgraph_title": "Left steer: Steering angle for 5 m/s^2 lat acceleration at 110 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_L__delta_0_5_SIS_L_110"]
+      },
+	  {
+        "subgraph_title": "Left steer: Steering angle for 5 m/s^2 lat acceleration at 130 km/h",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.1,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["TBUP_Slow_Steer_L__delta_0_5_SIS_L_130"]
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Lateral acceleration vs Steering torque at all speeds",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "TBUP_Entire_Steer_RL__LatAcc_StTorq",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4,5]}
+      }
+    ]    
+  },
+  "Page_3": {
+    "title": "Steering angle vs Steering torque at all speeds",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "TBUP_Entire_Steer_RL__StAng_StTorq",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4,5]}
+      }
+    ]    
+  },
+  "Page_4": {
+    "title": "Steering angle vs Lateral acceleration at all speeds",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Lateral acceleration (m/s^2)",
+        "xAxisTitle": "Steering angle (°)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "TBUP_Entire_Steer_RL__StAng_LatAcc",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4,5]}
+      }
+    ]    
+  },
+  "Page_5": {
+    "title": "Lateral acceleration vs Steering torque at all speeds",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Steering torque (Nm)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "TBUP_Entire_Steer_RL__LatAcc_StTorq",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4,5]}
+      }
+    ]    
+  },
+  "Page_6": {
+    "title": "Yaw velocity vs Lateral acceleration at all speeds",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Lateral acceleration (m/s^2)",
+        "xAxisTitle": "Yaw velocity (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "TBUP_Entire_Steer_RL__YawVel_LatAcc",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4,5]}
+      }
+    ]    
+  },
+  "Page_7": {
+    "title": "Lateral acceleration vs Front slip angle at all speeds",
+	"subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Front slip angle (°)",
+        "xAxisTitle": "Lateral acceleration (m/s^2)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "TBUP_Entire_Steer_RL__LatAcc_Front_R_Slip",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3,4,5]}
+      }
+    ]    
+  }
+  
+}

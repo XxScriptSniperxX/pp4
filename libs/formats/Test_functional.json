@@ -1,0 +1,39 @@
+{
+  "Page_0": {
+    "title": "Critères statico-dynamiques de synthèse DA géné",
+    "subgraphs": [
+      {
+        "subgraph_title": "Driver UDSTR (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["DA_gene_standard_sine__understeering_gradient_at_steering_wheel"]
+      },
+      {
+        "subgraph_title": "Gain max en lacet (deg²/s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_gene_standard_sine__yaw_gain"]
+      },
+      {
+        "subgraph_title": "Vitesse caractéristique (km/h)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_gene_standard_sine__characteristic_speed"]
+      },
+      {
+        "subgraph_title": "Roulis spécifique (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.2,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["DA_gene_standard_sine__specific_roll"]
+      }
+    ]
+  }
+}

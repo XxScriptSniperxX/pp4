@@ -1,0 +1,455 @@
+{
+  "Page_0": {
+    "title": "Critères statico-dynamiques de synthèse DA géné",
+    "subgraphs": [
+      {
+        "subgraph_title": "Driver UDSTR (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Standart_Sine__understeering_gradient_at_steering_wheel"]
+      },
+      {
+        "subgraph_title": "Gain max en lacet (deg²/s)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Standart_Sine__yaw_gain"]
+      },
+      {
+        "subgraph_title": "Vitesse caractéristique (km/h)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Standart_Sine__characteristic_speed"]
+      },
+      {
+        "subgraph_title": "Roulis spécifique (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.2,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Standart_Sine__specific_roll"]
+      },
+      {
+        "subgraph_title": "Evolution du gain d'assistance (3 m/s²)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.2,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Standart_Sine__assistance_gain_3"]
+      },
+      {
+        "subgraph_title": "Sans direction assistée (°.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.2,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Standart_Sine__understeering_gradient_without_assistance"]
+      },
+      {
+        "subgraph_title": "%",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.2,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Standart_Sine__delta_pct"]
+      }
+    ]
+  },
+  "Page_1": {
+    "title": "Critères transitoires de synthèse DA géné à V = 100km/h",
+    "subgraphs": [
+      {
+        "subgraph_title": "Dérive arrière spécifique (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Vobulated_Sine__rear_specific_slip"]
+      },
+      {
+        "subgraph_title": "Dérive avant spécifique (deg.s²/m)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__front_specific_slip"]
+      },
+      {
+        "subgraph_title": "Fréquence d'antirésonance de lacet (sur le roulis) (Hz)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__roll_antiresonance"]
+      },
+      {
+        "subgraph_title": "Amortissement d'antirésonance de lacet (sur le roulis)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__roll_damping"]
+      },
+      {
+        "subgraph_title": "Fréquence d'antirésonance de lacet (sur l'accel trans) (Hz)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__yaw_antiresonance"]
+      },
+      {
+        "subgraph_title": "Amortissement d'antirésonance de lacet (sur l'accel trans) (Hz)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__yaw_damping"]
+      },
+      {
+        "subgraph_title": "Taux d'amortissement pour un balant nul",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__yaw_damping_at_null_dangling"]
+      },
+	  {
+        "subgraph_title": "Ballant estimé au TAR (mm/100daN)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__dangling"]
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Critères transitoires de synthèse DA géné à V = 100km/h (suite)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Fréquence caractéristique (Hz)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Vobulated_Sine__characteristic_frequency"]
+      },
+      {
+        "subgraph_title": "Taux d'amortissement caractéristique",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__characteristic_damping"]
+      },
+      {
+        "subgraph_title": "Yaw croise la fréquence (Hz)",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__characteristic_frequency_speed"]
+      },
+      {
+        "subgraph_title": "Taux d'amortissement à la vitesse d'essai",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__characteristic_damping_speed"]
+      }
+    ]
+  },
+  "Page_3": {
+    "title": "Target management criterions (1)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Gain of roll rate / steering wheel angle at 0.4 Hz [dB]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Vobulated_Sine__roll_stw_gain_at_0_4Hz"]
+      },
+      {
+        "subgraph_title": "Gain of roll rate / steering wheel angle at 1.0 Hz [dB]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__roll_stw_gain_at_1Hz"]
+      },
+      {
+        "subgraph_title": "Phase of roll rate / steering wheel angle at 0.4 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__roll_stw_phase_at_0_4Hz"]
+      },
+      {
+        "subgraph_title": "Phase of roll rate / steering wheel angle at 1.0 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__roll_stw_phase_at_1Hz"]
+      },
+      {
+        "subgraph_title": "Gain of yaw rate / steering wheel angle at 0.4 Hz [dB]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Vobulated_Sine__yaw_stw_gain_at_0_4Hz"]
+      },
+      {
+        "subgraph_title": "Maximum gain of yaw rate / steering wheel angle at resonance [dB]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__yaw_stw_gain_at_resonant_f"]
+      },
+      {
+        "subgraph_title": "Frequency of yaw rate / steering wheeel angle at -3 dB [Hz]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__yaw_stw_frequency_at_minus3_dB"]
+      },
+      {
+        "subgraph_title": "Phase of yaw rate / steering wheel angle at 0.4 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__yaw_stw_phase_at_0_4Hz"]
+      },
+      {
+        "subgraph_title": "Phase of yaw rate / steering wheel angle at 1.0 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__yaw_stw_phase_at_1Hz"]
+      }
+    ]
+  },
+  "Page_4": {
+    "title": "Target management criterions (2)",
+    "subgraphs": [
+      {
+        "subgraph_title": "Gain of lateral acceleration / steering wheel angle at 0.4 Hz [dB]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Vobulated_Sine__accy_stw_gain_at_0_4Hz"]
+      },
+	  {
+        "subgraph_title": "Frequency of lateral acceleration / steering wheeel angle at -6 dB [Hz]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__accy_stw_frequency_at_minus6_dB"]
+      },
+      {
+        "subgraph_title": "Phase of lateral acceleration / steering wheel angle at 0.4 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__accy_stw_phase_at_0_4Hz"]
+      },
+      {
+        "subgraph_title": "Phase of lateral acceleration / steering wheel angle at 1.0 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__accy_stw_phase_at_1Hz"]
+      },
+	  {
+        "subgraph_title": "Lateral acceleration notch frequency at speed [Hz]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Vobulated_Sine__lateral_g_notch_frequency_at_speed"]
+      },
+	  {
+        "subgraph_title": "Gain of lateral acceleration / yaw rate at 0.4 Hz [dB]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list": ["Vobulated_Sine__accy_yaw_gain_at_0_4Hz"]
+      },
+	  {
+        "subgraph_title": "Frequency of lateral acceleration / yaw rate at -6 dB [Hz]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__accy_yaw_frequency_at_minus6_dB"]
+      },
+      {
+        "subgraph_title": "Phase of lateral acceleration / yaw rate at 0.4 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__accy_yaw_phase_at_0_4Hz"]
+      },
+      {
+        "subgraph_title": "Phase of lateral acceleration / yaw rate at 1.0 Hz [deg]",
+        "subgraph_type": "1DHorizontalCriteria",
+        "xAxis_scale_range": [],
+        "xAxis_scale_major_tick_step": 0.5,
+        "xAxis_scale_minor_tick_step": 0.0,
+        "criteria_id_list":  ["Vobulated_Sine__accy_yaw_phase_at_1Hz"]
+      }
+    ]
+  },
+  "Page_5": {
+    "title": "Fonction de transfert Lacet / Angle volant",
+    "subgraphs": [
+      {
+        "subgraph_title": "Amplitude de la fonction de transfert Lacet / Angle volant (dB)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Amplitude (dB)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__yaw_rate_bode",
+		"x_value": 0,
+		"y_values_list": [0]
+		}
+      },
+	  {
+        "subgraph_title": "Phase de la fonction de transfert Lacet / Angle volant (deg)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Phase (deg)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__yaw_rate_bode",
+		  "x_value": 0,
+		  "y_values_list": [1]
+		}
+      }
+    ]
+  },
+  "Page_6": {
+    "title": "Fonction de transfert Accélération Latérale / Angle volant",
+    "subgraphs": [
+      {
+        "subgraph_title": "Amplitude de la fonction de transfert Accélération Latérale / Angle volant (dB)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Amplitude (dB)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__accy_bode",
+		"x_value": 0,
+		"y_values_list": [0]
+		}
+      },
+	  {
+        "subgraph_title": "Phase de la fonction de transfert Accélération Latérale / Angle volant (deg)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Phase (deg)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__accy_bode",
+		  "x_value": 0,
+		  "y_values_list": [1]
+		}
+      }
+    ]
+  },
+  "Page_7": {
+    "title": "Fonction de transfert Roulis / Angle volant",
+    "subgraphs": [
+      {
+        "subgraph_title": "Amplitude de la fonction de transfert Roulis / Angle volant (dB)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Amplitude (dB)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__roll_rate_bode",
+		"x_value": 0,
+		"y_values_list": [0]
+		}
+      },
+	  {
+        "subgraph_title": "Phase de la fonction de transfert Roulis / Angle volant (deg)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Phase (deg)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__roll_rate_bode",
+		  "x_value": 0,
+		  "y_values_list": [1]
+		}
+      }
+    ]
+  },
+  "Page_8": {
+    "title": "Fonction de transfert Accélération Latérale / Lacet",
+    "subgraphs": [
+      {
+        "subgraph_title": "Amplitude de la fonction de transfert Accélération Latérale / Lacet (dB)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Amplitude (dB)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__accy_yawrate_bode",
+		"x_value": 0,
+		"y_values_list": [0]
+		}
+      },
+	  {
+        "subgraph_title": "Phase de la fonction de transfert Accélération Latérale / lacet (deg)",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Phase (deg)",
+        "xAxisTitle": "Frequence (Hz)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+		"x_axis_log_scale": true,
+		"spline_criteria": {
+		  "id": "Vobulated_Sine__accy_yawrate_bode",
+		  "x_value": 0,
+		  "y_values_list": [1]
+		}
+      }
+    ]
+  }
+}

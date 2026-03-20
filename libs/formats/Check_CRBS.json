@@ -1,0 +1,164 @@
+{
+  "Page_1": {
+    "title": "Steering input",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Input strg angle (deg)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__input_steering",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_3": {
+    "title": "Longitudinal velocity",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "X-velocity (m/s)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__vel_x",
+                "x_value": 0,
+                "y_values_list": [0]}
+      }
+    ]
+  },
+  "Page_2": {
+    "title": "Input braking",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Brake pedal position (0~1)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__input_braking",
+                "x_value": 0,
+                "y_values_list": [0]}
+      } 
+	]
+  },
+  "Page_4": {
+    "title": "Brake pressures",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Braking pressure at calipers (bar)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__brk_pressure",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3]}
+      } 
+	]
+  },
+  "Page_5": {
+    "title": "Trajectory",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Y-Position (m)",
+        "xAxisTitle": "X-Position (m)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__trajectory",
+                "x_value": 0,
+                "y_values_list": [0]}
+      } 
+	]
+  },
+  "Page_6": {
+    "title": "ABS activation (0~2)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "ABS regulation at wheels",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__abs_regulation",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3]}
+      } 
+	]
+  },
+  "Page_7": {
+    "title": "ESP activation (0~1)",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "ESP regulation at wheels",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__esp_regulation",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3]}
+      } 
+	]
+  },
+  "Page_8": {
+    "title": "TCS/ASR activation",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "TCS/ASR regulation at wheels (0~1)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__asr_regulation",
+                "x_value": 0,
+                "y_values_list": [0,1,2,3]}
+      } 
+	]
+  },
+  "Page_9": {
+    "title": "Deceleration",
+    "subgraphs": [
+      {
+        "subgraph_title": "",
+        "subgraph_type": "twoDimGraph",
+        "yAxisTitle": "Deceleration (m/s^2)",
+        "xAxisTitle": "Time (s)",
+        "criteria_id_for_curve": [],
+        "iso_curves": false,
+        "x_axis_log_scale": false,
+        "spline_criteria": {
+                "id": "Check_FMU_CRBS__deceleration",
+                "x_value": 0,
+                "y_values_list": [0]}
+      } 
+	]
+  }
+}
