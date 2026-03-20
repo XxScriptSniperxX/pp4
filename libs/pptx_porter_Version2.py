@@ -28,7 +28,6 @@ from st_ant_tree import st_ant_tree
 # CONFIGURATION FOR STREAMLIT CLOUD
 # ============================================================================
 
-# Use Streamlit's cache directory for temporary files
 @st.cache_resource
 def get_temp_dir():
     """Get temp directory for Streamlit Cloud."""
@@ -115,6 +114,20 @@ def clean_vehicle_names(vehicle_names: list[str]) -> dict[str, str]:
 # ============================================================================
 # IMAGE PROCESSING FUNCTIONS (WITH OPTIMIZATION)
 # ============================================================================
+
+def optimize_image(image_path: str, quality: int = 85) -> None:
+    """Optimize image file size after saving using PIL."""
+    try:
+        img = Image.open(image_path)
+        # For PNG, use optimize flag; for JPEG, use quality
+        if image_path.lower().endswith('.png'):
+            img.save(image_path, 'PNG', optimize=True)
+        else:
+            img.save(image_path, quality=quality)
+        img.close()
+    except Exception as e:
+        pass  # Silent fail - optimization not critical
+
 
 def respect(image: Image.Image, target_size: tuple = DEFAULT_PLOT_SIZE, 
             bg_color: tuple = (255, 255, 255)) -> Image.Image:
@@ -334,28 +347,28 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
         if progress_callback:
             progress_callback(f"Processing {maneuver_id} - Page {idx+1}/{len(figures)}")
         
-        fig, split_ratio = figdata.render_page(
-            page_data=figdata.page_data,
-            vehicle_labels=st.session_state["impostors"].get(maneuver_id, {}).get(f"Page_{idx}", []),
-            cutfactor_1d=cutfactor_1d,
-            cutfactor_2d=cutfactor_2d
-        )
-
-        base_img_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_full.png")
-        
-        # Save figure based on type - FIXED
         try:
+            fig, split_ratio = figdata.render_page(
+                page_data=figdata.page_data,
+                vehicle_labels=st.session_state["impostors"].get(maneuver_id, {}).get(f"Page_{idx}", []),
+                cutfactor_1d=cutfactor_1d,
+                cutfactor_2d=cutfactor_2d
+            )
+
+            base_img_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_full.png")
+            
+            # Save figure based on type - FIXED
             if isinstance(fig, plt.Figure):
-                # Matplotlib figure - no optimize parameter
+                # Matplotlib figure - save without optimize parameter
                 fig.savefig(base_img_path, dpi=DEFAULT_DPI, bbox_inches="tight", format='png')
                 plt.close(fig)
                 # Optimize AFTER saving
-                optimize_image(base_img_path, quality=85)
+                optimize_image(base_img_path)
             else:
                 # Plotly or other figure type
                 fig.write_image(base_img_path, scale=1)
                 # Optimize after save
-                optimize_image(base_img_path, quality=85)
+                optimize_image(base_img_path)
                 
                 img = Image.open(base_img_path)
                 w, h = img.size
@@ -372,14 +385,18 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             plot_crop = img.crop((0, 0, x, h))
             legend_crop = img.crop((x, y, x + cw, y + ch))
 
-            # Resize images with optimization
+            # Resize images
             plot_resized = respect(plot_crop, DEFAULT_PLOT_SIZE)
             plot_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_plot.png")
-            plot_resized.save(plot_path, quality=85)  # PNG doesn't use quality, but harmless
+            plot_resized.save(plot_path)
             
             legend_resized = resend(legend_crop, *DEFAULT_LEGEND_SIZE)
             legend_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_legend.png")
-            legend_resized.save(legend_path, quality=85)
+            legend_resized.save(legend_path)
+
+            # Optimize resized images
+            optimize_image(plot_path)
+            optimize_image(legend_path)
 
             img.close()
             plot_crop.close()
@@ -422,8 +439,6 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
 
         except Exception as e:
             st.error(f"Error processing {maneuver_id} Page {idx}: {str(e)}")
-            import traceback
-            st.error(traceback.format_exc())
             continue
 
 # ============================================================================
@@ -624,7 +639,6 @@ def pptX_export():
         
         except Exception as e:
             st.error(f"❌ Export failed: {str(e)}")
-            st.error(f"**Debug Info:** {type(e).__name__}")
 
 
 def pptX_tab():
