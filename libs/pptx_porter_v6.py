@@ -131,31 +131,46 @@ def clean_vehicle_names(vehicle_names: list[str]) -> dict[str, str]:
     return cleaned
 
 # ============================================================================
-# FIGURE CONVERSION - HIGH QUALITY
+# FIGURE CONVERSION - HIGH QUALITY - FIXED
 # ============================================================================
 
 def figure_to_bytes(fig, is_plotly: bool = False) -> bytes:
     """
     Convert figure to bytes (HIGH QUALITY).
-    Matplotlib: dpi=300
-    Plotly: scale=2
+    
+    IMPORTANT FIX:
+    - Matplotlib: dpi=300 (safe to scale down later)
+    - Plotly: scale=1 (render at final size, no rescaling needed)
     
     Returns bytes that can be processed by cv2.
     """
     try:
         if is_plotly:
             try:
-                # Plotly HIGH QUALITY
-                image_bytes = fig.to_image(format='png', width=1600, height=1200, scale=PLOTLY_SCALE)
+                # PLOTLY: Render at FINAL SIZE directly
+                # DON'T use scale=2 - it causes text distortion
+                # Use final target width/height instead
+                image_bytes = fig.to_image(
+                    format='png', 
+                    width=950,      # Final plot size width
+                    height=700,     # Final plot size height
+                    scale=1         # NO SCALING - render at final size
+                )
                 return image_bytes
             except Exception:
                 # Fallback
                 buf = io.BytesIO()
-                fig.write_image(buf, format='png', width=1600, height=1200, scale=PLOTLY_SCALE)
+                fig.write_image(
+                    buf, 
+                    format='png', 
+                    width=950,      # Final size
+                    height=700,     # Final size
+                    scale=1         # No scaling
+                )
                 buf.seek(0)
                 return buf.getvalue()
         else:
-            # Matplotlib HIGH QUALITY
+            # Matplotlib: Safe to render at high DPI then scale down
             buf = io.BytesIO()
             fig.savefig(buf, dpi=MATPLOTLIB_DPI, format='png', bbox_inches='tight', 
                        facecolor='white', edgecolor='none')
@@ -173,6 +188,8 @@ def figure_to_bytes(fig, is_plotly: bool = False) -> bytes:
         plt.close(fig_err)
         buf.seek(0)
         return buf.getvalue()
+
+
 
 # ============================================================================
 # CV2 LEGEND DETECTION PIPELINE
@@ -286,28 +303,41 @@ def pil_to_cv2(pil_img: Image.Image) -> np.ndarray:
     return bgr
 
 # ============================================================================
-# HIGH QUALITY RESIZE WITH ASPECT RATIO
+# HIGH QUALITY RESIZE - IMPROVED
 # ============================================================================
 
 def respect(image: Image.Image, target_size: tuple = PLOT_SIZE_1D, 
-            bg_color: tuple = (255, 255, 255)) -> Image.Image:
+            bg_color: tuple = (255, 255, 255), is_plotly: bool = False) -> Image.Image:
     """
     Resize with aspect ratio maintained (HIGH QUALITY LANCZOS).
     
+    FIX: For Plotly, skip resizing if already at target size
+    (Plotly renders text at correct size, rescaling distorts it)
+    
     ADJUST target_size:
     - For 1D plots: use PLOT_SIZE_1D = (854, 586)
-    - For 2D plots: use PLOT_SIZE_2D = (950, 700) to avoid squeezing
+    - For 2D plots: use PLOT_SIZE_2D = (950, 700)
     
     Args:
         image: PIL Image
         target_size: (width, height)
         bg_color: RGB tuple for padding
+        is_plotly: If True, skip rescaling (text already at correct size)
     
     Returns:
         PIL Image at target_size with aspect ratio preserved
     """
     target_w, target_h = target_size
     w, h = image.size
+    
+    # For Plotly: If already near target size, don't rescale (preserves text)
+    if is_plotly:
+        # Allow 10% tolerance
+        if (abs(w - target_w) < target_w * 0.1 and 
+            abs(h - target_h) < target_h * 0.1):
+            # Already at target size, just pad if needed
+            if w == target_w and h == target_h:
+                return image
     
     # Calculate scale to fit BOTH dimensions without stretching
     scale = min(target_w / w, target_h / h)
@@ -321,7 +351,6 @@ def respect(image: Image.Image, target_size: tuple = PLOT_SIZE_1D,
     offset = ((target_w - new_w) // 2, (target_h - new_h) // 2)
     canvas.paste(resized, offset)
     return canvas
-
 
 def resend(image: Image.Image, target_width_px: int = LEGEND_SIZE[0], 
            target_height_px: int = LEGEND_SIZE[1], 
@@ -497,14 +526,7 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
     """
     Create maneuver slides with cv2 legend detection pipeline.
     
-    Pipeline:
-    1. figure -> bytes (HIGH QUALITY: dpi=300, scale=2)
-    2. bytes -> cv2 (BGR numpy array)
-    3. cv2_detect_legend_bbox (cv2 contour detection)
-    4. crop_and_separate (split into plot + legend WITH PADDING)
-    5. cv2_to_pil (convert to PIL for resizing)
-    6. respect/resend (PIL LANCZOS resize with aspect ratio)
-    7. PIL -> bytes (back to bytes for PPTX)
+    FIXED: Plotly figures rendered at final size to preserve text
     """
     if table_mapping is None:
         table_mapping = {}
@@ -553,13 +575,13 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             legend_pil = cv2_to_pil(legend_bgr)
             
             # STEP 7: HIGH QUALITY RESIZE (LANCZOS + aspect ratio)
-            # Different sizes for 1D vs 2D to avoid squeezing
+            # FIX: Pass is_plotly to skip rescaling text
             if is_plotly:
-                # 2D Plotly plots - larger size
-                plot_resized = respect(plot_pil, PLOT_SIZE_2D)
+                # 2D Plotly plots - skip rescaling to preserve text size
+                plot_resized = respect(plot_pil, PLOT_SIZE_2D, is_plotly=True)
             else:
-                # 1D Matplotlib plots - original size
-                plot_resized = respect(plot_pil, PLOT_SIZE_1D)
+                # 1D Matplotlib plots - safe to rescale
+                plot_resized = respect(plot_pil, PLOT_SIZE_1D, is_plotly=False)
             
             legend_resized = resend(legend_pil, *LEGEND_SIZE)
             
@@ -611,7 +633,6 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             import traceback
             st.error(traceback.format_exc())
             continue
-
 # ============================================================================
 # STREAMLIT UI
 # ============================================================================
