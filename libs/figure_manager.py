@@ -20,7 +20,7 @@ import matplotlib as mpl
 
 
 STYLE_CONFIG = {
-    "font_family": "Arial",
+    "font_family": "DejaVu Sans",
     "page_title_size": 15,
     "subgraph_title_size": 14,
     "legend_size": 12,
