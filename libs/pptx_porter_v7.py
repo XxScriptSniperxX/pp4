@@ -56,7 +56,7 @@ def get_template_path() -> str:
 
 # Plot sizing
 PLOT_SIZE_1D = (854, 586)           # 1D Matplotlib plots
-PLOT_SIZE_2D = (950, 700)           # 2D Plotly plots (larger to avoid squeezing)
+PLOT_SIZE_2D = (854, 586)           # 2D Plotly plots (larger to avoid squeezing)
 LEGEND_SIZE = (348, 344)
 
 # Legend cropping padding (adjust to show/hide borders)
