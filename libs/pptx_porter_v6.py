@@ -807,7 +807,7 @@ def pptX_export():
             st.error(f"❌ {str(e)[:150]}")
 
 
-def pptx_tab():
+def pptX_tab():
     """Main interface."""
     tab1, tab2 = st.tabs(["📋 Tables", "📤 Export"])
     with tab1:
