@@ -5,7 +5,7 @@ Created on Tue Mar 17 10:13:51 2026
 @tag: Xx_ScriptSniper_xX
 @author: Albin
 
-Optimized for Streamlit Cloud deployment - FAST VERSION
+Optimized for Streamlit Cloud - NO CHROME DEPENDENCY
 """
 from pptx import Presentation
 from pptx.util import Inches, Cm, Pt
@@ -47,17 +47,15 @@ def get_template_path() -> str:
     return template
 
 
-# Constants - OPTIMIZED FOR SPEED
+# Constants - OPTIMIZED FOR SPEED & CLOUD
 DEFAULT_PLOT_SIZE = (854, 586)
 DEFAULT_LEGEND_SIZE = (348, 344)
 DEFAULT_MAX_LEGEND_HEIGHT = Cm(0.45)
 TABLE_HEADER_COLOR = RGBColor(220, 220, 220)
 TABLE_FONT_SIZE = Pt(10)
 LEGEND_FALLBACK_RATIO = 0.75
-DEFAULT_DPI = 100  # REDUCED from 150 for SPEED
-PLOTLY_SCALE = 0.5  # REDUCED from 1 - HUGE SPEEDUP
+DEFAULT_DPI = 100
 TEMP_IMAGE_FOLDER = "ppt_temp_images"
-CHUNK_SIZE = 5242880  # 5MB for file downloads
 
 # ============================================================================
 # UTILITY FUNCTIONS
@@ -113,21 +111,47 @@ def clean_vehicle_names(vehicle_names: list[str]) -> dict[str, str]:
     return cleaned
 
 # ============================================================================
-# IMAGE PROCESSING FUNCTIONS (OPTIMIZED FOR SPEED)
+# IMAGE PROCESSING FUNCTIONS
 # ============================================================================
 
-def quick_optimize_image(image_path: str) -> None:
-    """Minimal image optimization - speed prioritized."""
+def save_plotly_figure_safe(fig, base_img_path: str) -> bool:
+    """
+    Try to save Plotly figure, but don't fail on Chrome missing.
+    Returns True if successful, False if Kaleido unavailable.
+    """
     try:
-        img = Image.open(image_path)
-        # Only re-save if it's a PNG, otherwise skip
-        if image_path.lower().endswith('.png'):
-            # Just close without re-saving to save time
-            img.close()
+        # Try write_image first (fast if it works)
+        fig.write_image(base_img_path, scale=0.5, width=1200, height=800)
+        return True
+    except Exception as e:
+        # If Kaleido/Chrome not available, use fallback
+        error_msg = str(e).lower()
+        if "chrome" in error_msg or "kaleido" in error_msg:
+            st.warning("⚠️ Plotly export skipped (Chrome not available). Using placeholder.")
+            return False
         else:
-            img.close()
-    except Exception:
-        pass  # Silent fail - not critical
+            raise  # Re-raise other exceptions
+
+
+def create_plotly_fallback_image(base_img_path: str, maneuver_id: str, page_idx: int) -> None:
+    """Create a simple placeholder image when Plotly export fails."""
+    from PIL import ImageDraw, ImageFont
+    
+    # Create gray placeholder
+    img = Image.new('RGB', (1200, 800), color=(240, 240, 240))
+    draw = ImageDraw.Draw(img)
+    
+    text = f"{maneuver_id} - Page {page_idx}\n(2D Plot - Streamlit Cloud)"
+    
+    # Draw text
+    try:
+        draw.text((600, 400), text, fill=(100, 100, 100), anchor="mm")
+    except:
+        # If font fails, just save the gray image
+        pass
+    
+    img.save(base_img_path)
+    img.close()
 
 
 def respect(image: Image.Image, target_size: tuple = DEFAULT_PLOT_SIZE, 
@@ -330,20 +354,6 @@ def insert_stowaway_tables(slide, maneuver_id: str, page_idx: int,
             row.height = row_height
 
 
-def save_figure_fast(fig, base_img_path: str, is_plotly: bool = False) -> None:
-    """Save figure with MINIMAL processing - FASTEST VERSION."""
-    try:
-        if is_plotly:
-            # Plotly: use minimal scale for SPEED
-            fig.write_image(base_img_path, scale=PLOTLY_SCALE, width=1200, height=800)
-        else:
-            # Matplotlib: use low DPI
-            fig.savefig(base_img_path, dpi=DEFAULT_DPI, bbox_inches="tight", format='png')
-            plt.close(fig)
-    except Exception as e:
-        raise e
-
-
 def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
                           cutfactor_1d: float, cutfactor_2d: float, temp_dir: str,
                           table_mapping: dict = None, slide_number: int = None,
@@ -375,18 +385,17 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             # Detect if plotly
             is_plotly = not isinstance(fig, plt.Figure)
             
-            # FAST save - minimal processing
-            save_figure_fast(fig, base_img_path, is_plotly=is_plotly)
-
-            # For Plotly, handle margin crop
+            # Save figure
             if is_plotly:
-                img = Image.open(base_img_path)
-                w, h = img.size
-                margin = 50
-                figcrop = img.crop((margin, 0, w, h))
-                figcrop.save(base_img_path)
-                img.close()
-                figcrop.close()
+                # Try Plotly export, fallback to placeholder
+                success = save_plotly_figure_safe(fig, base_img_path)
+                if not success:
+                    # Chrome/Kaleido not available - create placeholder
+                    create_plotly_fallback_image(base_img_path, maneuver_id, idx)
+            else:
+                # Matplotlib - always works
+                fig.savefig(base_img_path, dpi=DEFAULT_DPI, bbox_inches="tight", format='png')
+                plt.close(fig)
 
             # Legend detection and splitting
             legend_bbox, h, w = detect_legend_bbox(base_img_path, fallback_ratio=split_ratio)
@@ -396,16 +405,16 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             plot_crop = img.crop((0, 0, x, h))
             legend_crop = img.crop((x, y, x + cw, y + ch))
 
-            # Resize - NO extra optimization
+            # Resize
             plot_resized = respect(plot_crop, DEFAULT_PLOT_SIZE)
             plot_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_plot.png")
-            plot_resized.save(plot_path)  # Fast PNG save
+            plot_resized.save(plot_path)
             
             legend_resized = resend(legend_crop, *DEFAULT_LEGEND_SIZE)
             legend_path = os.path.join(temp_dir, f"{maneuver_id}_Page{idx}_legend.png")
-            legend_resized.save(legend_path)  # Fast PNG save
+            legend_resized.save(legend_path)
 
-            # Clean up memory
+            # Cleanup
             img.close()
             plot_crop.close()
             legend_crop.close()
@@ -436,7 +445,7 @@ def create_maneuver_slides(prs: Presentation, maneuver_id: str, figures: list,
             except KeyError:
                 slide.shapes.add_picture(legend_path, Inches(6.0), Inches(1.5))
 
-            # Insert tables if applicable
+            # Insert tables
             if maneuver_id in table_mapping and str(idx) in table_mapping[maneuver_id]:
                 insert_stowaway_tables(slide, maneuver_id, idx, table_mapping)
             else:
@@ -572,7 +581,7 @@ def pptX_export():
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        export_btn = st.button("🚀 Generate PPT", key="ppt_export", use_container_width=True)
+        export_btn = st.button("🚀 Generate PPT", key="ppt_export", width="stretch")
     
     with col2:
         if st.session_state.get("pptx_ready", False):
@@ -584,7 +593,7 @@ def pptX_export():
                         data=f,
                         file_name=f"{filename}.pptx",
                         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation",
-                        use_container_width=True
+                        width="stretch"
                     )
 
     if export_btn:
@@ -642,16 +651,14 @@ def pptX_export():
             st.session_state["pptx_ready"] = True
             
             progress_bar.progress(100)
-            st.success(f"✅ PPT generated successfully! File size: {os.path.getsize(ppt_path) / (1024*1024):.1f} MB")
+            file_size = os.path.getsize(ppt_path) / (1024*1024)
+            st.success(f"✅ PPT generated! ({file_size:.1f} MB)")
             st.balloons()
             
-            # Auto-rerun to show download button
             st.rerun()
         
         except Exception as e:
             st.error(f"❌ Export failed: {str(e)}")
-            import traceback
-            st.error(traceback.format_exc())
 
 
 def pptX_tab():
