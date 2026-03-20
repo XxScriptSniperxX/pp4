@@ -22,12 +22,12 @@ from PIL import Image
 from datetime import datetime
 import shutil
 import kaleido
-try:
-    kaleido.get_chrome()
-except:
-    pass 
+# try:
+#     kaleido.get_chrome()
+# except:
+#     pass 
 
-kaleido.start_sync_server(n=5)
+# kaleido.start_sync_server(n=5)
 
 
 st.markdown('<div id="top"></div>', unsafe_allow_html=True)
