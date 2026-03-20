@@ -14,7 +14,7 @@ from copy import deepcopy
 from libs.figure_manager import FigureData, ManageData
 from libs.color_manager import ColorManager
 from libs.AA_utils import update_presets_json,load_presets,phunt
-from libs.pptx_porter_v7 import pptX_tab
+from libs.pptx_porter_v8 import pptX_tab
 import matplotlib.pyplot as plt
 from pptx import Presentation
 from pptx.util import Inches
