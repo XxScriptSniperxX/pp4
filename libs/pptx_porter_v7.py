@@ -146,12 +146,12 @@ def figure_to_bytes(fig, is_plotly: bool = False) -> bytes:
         if is_plotly:
             try:
                 # Plotly HIGH QUALITY
-                image_bytes = fig.to_image(format='png', width=1600, height=1200, scale=PLOTLY_SCALE)
+                image_bytes = fig.to_image(format='png', width=854, height=586, scale=PLOTLY_SCALE)
                 return image_bytes
             except Exception:
                 # Fallback
                 buf = io.BytesIO()
-                fig.write_image(buf, format='png', width=1600, height=1200, scale=PLOTLY_SCALE)
+                fig.write_image(buf, format='png', width=854, height=586, scale=PLOTLY_SCALE)
                 buf.seek(0)
                 return buf.getvalue()
         else:
