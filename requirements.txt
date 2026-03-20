@@ -3,7 +3,7 @@ Pillow
 matplotlib
 numpy
 plotly
-kaleido
+kaleido==0.2.1
 st-ant-tree
 streamlit
 streamlit-webrtc
