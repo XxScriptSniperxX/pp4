@@ -514,7 +514,7 @@ if st.sidebar.button("🚀 Let's Roll", use_container_width=True):
                 "DA80_Kph_LH" : "DA_80kph_new.json",
             }
             BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-            format_folder = os.path.join(BASE_DIR, "ReportManager")
+            format_folder = os.path.join(BASE_DIR, "libs/formats")
 
             # Build alias mapping from session state
             aliases_map = st.session_state.get("aliases", {})
